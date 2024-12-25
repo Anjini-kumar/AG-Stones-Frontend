@@ -1,0 +1,364 @@
+/* Container and Title */
+.warehouse-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.warehouse-title {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Search Filters */
+.search-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 48%;
+}
+
+/* Table Styling */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.product-table thead {
+    background-color: #f9f9f9;
+}
+
+.product-table th, .product-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.product-table th {
+    font-weight: bold;
+    color: #666;
+}
+
+.product-table td {
+    color: #333;
+}
+
+/* Buttons */
+.gallery-button, .status-button, .comment-button {
+    background-color: #FFD700;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.status-button {
+    background-color: #00bcd4;
+}
+
+.comment-button {
+    background-color: #ffd700;
+}
+
+.gallery-button:hover, .status-button:hover, .comment-button:hover {
+    background-color: #e6be00;
+}
+
+/* Request Details */
+.request-details {
+    margin-top: 20px;
+}
+
+.request-details h4 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.request-search-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.table-container {
+    overflow-x: auto; /* Enables horizontal scroll */
+    margin-bottom: 20px;
+}
+
+.product-table {
+    width: 100%;
+    min-width: 1200px; /* Adjust this width based on the minimum width you need */
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.popup-image {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 4px;
+}
+
+.comment-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+}
+
+.submit-comment-button {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.submit-comment-button:hover {
+    background-color: #45a049;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Image gallery */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+    gap: 10px;
+    max-height: calc(4 * 120px); /* Limit to 4 rows (each row ~120px height including gaps) */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.popup-image {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.popup-image:hover {
+    transform: scale(1.05); /* Zoom effect on hover */
+}
+
+/* Modal for expanded image */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-image-content {
+    position: relative;
+    padding: 10px;
+    background: #422727;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: hidden;
+}
+
+.expanded-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+
+.add-image-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.add-image-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-image-button:hover {
+    background-color: #0056b3;
+}
+
+/* status */
+.status-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .popup-content h3 {
+    margin-bottom: 10px;
+  }
+  
+  .status-option {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .status-option.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .popup-content button {
+    margin: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .action-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }

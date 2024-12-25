@@ -1,0 +1,153 @@
+/* Container and Title */
+.product-master-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.product-master-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Input Area */
+.product-inputs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.product-input {
+    margin: 0 5px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.add-category-button {
+    background-color: #Ffd200;
+    color: black;
+    border: none;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.add-category-button:hover {
+    background-color: #ffd0009e;
+}
+
+/* Table Styles */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    display: inline-table;
+    min-width: fit-content;
+}
+
+.product-table thead {
+    background-color: #f9f9f9;
+    min-width: fit-content;
+}
+
+.product-table th, .product-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    min-width: fit-content;
+}
+
+.product-table th {
+    font-weight: bold;
+    color: #666;
+}
+
+.product-table td {
+    color: #333;
+    min-width: fit-content;
+}
+
+/* Delete Button */
+.delete-button {
+    background-color: #ffd200;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-button:hover {
+    background-color: #ffd0009e;
+}
+
+.table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%; /* Full width */
+    margin-top: 20px; /* Space above table */
+}
+
+.product-table {
+    width: 100%; /* Full table width to ensure columns take up space */
+    border-collapse: collapse;
+    min-width: fit-content;
+}
+
+.product-table th, .product-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    min-width: fit-content;
+}
+
+.message {
+    color: green;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+/* Prevent entire page from scrolling horizontally */
+.product-master-container {
+    overflow-x: hidden; /* Prevent horizontal scroll on the entire page */
+    padding: 20px;
+}
+
+/* Scrollable Table Container */
+.table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    max-width: 100%; /* Container should be responsive */
+    margin-top: 20px; /* Space above the table */
+    box-sizing: border-box;
+}
+
+/* Style table to be fully responsive */
+.product-table {
+    width: 100%; /* Table width should fill its container */
+    border-collapse: collapse;
+    min-width: fit-content;
+     /* Set a minimum width to ensure columns don't collapse too much */
+}
+
+.product-table th, .product-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    min-width: fit-content;
+}
+
+/* Additional styling for success message */
+.message {
+    color: green;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+.product-table{
+    min-width: fit-content !important;
+}
+
+

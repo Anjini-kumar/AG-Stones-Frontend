@@ -1,0 +1,97 @@
+.add-user-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px; /* Set a max width for the form */
+  margin: auto; /* Center the form horizontally */
+}
+
+.add-user-form h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.add-user-form label {
+  font-weight: 500;
+  margin: 10px 0 5px;
+}
+
+.add-user-form input,
+.add-user-form select {
+  padding: 8px 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.add-user-form input[type="password"] {
+  margin-bottom: 20px;
+}
+
+.add-user-button {
+  background-color: #ffd200;
+  color: #333;
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.add-user-button:hover {
+  background-color: #e6c200;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .add-user-form {
+      padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .add-user-form h2 {
+      font-size: 1.3em; /* Slightly smaller heading */
+  }
+
+  .add-user-button {
+      font-size: 0.9em; /* Smaller button text */
+  }
+
+  .add-user-form input,
+  .add-user-form select {
+      font-size: 0.9em; /* Smaller input/select text */
+  }
+}
+
+@media (max-width: 400px) {
+  .add-user-form {
+      padding: 10px; /* Further reduce padding */
+  }
+
+  .add-user-form h2 {
+      font-size: 1.2em; /* Even smaller heading */
+  }
+
+  .add-user-button {
+      font-size: 0.8em; /* Even smaller button text */
+  }
+
+  .add-user-form input,
+  .add-user-form select {
+      font-size: 0.8em; /* Even smaller input/select text */
+  }
+}

@@ -1,0 +1,215 @@
+/* Container for overall product management section */
+.product-management {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Title styling */
+.product-management h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Search input and button alignment */
+.prod-and-add {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+  }
+.search-inputs {
+    width: 50%;
+    height: 30px;
+    margin-right: 25px;
+    border: 1px solid #ccc;
+}
+
+.product-management-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 50%;
+    background-color: #ffd200;
+    color: black;
+    font-weight: bolder;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.product-management-btn:hover {
+    background-color: #ffd0009e;
+}
+
+/* Alignment for search and button container */
+.product-management {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.search-bar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+/* Table container styling */
+.table-container {
+    display: inline-table;
+    overflow-x: hidden !important;
+    width: 100% !important;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.product-table th,
+.product-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+}
+
+/* Modal styling */
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    position: relative;
+    overflow-y: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-height: 80vh;
+    width: 100%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+/* Form styling inside modal */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    background-color: #ffd200;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #ffd0009e;
+}
+
+/* Pagination styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #ffd200;
+    background: none;
+    background-color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Button for gallery inside table */
+.gallery-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #ffd200;
+    color: black;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gallery-btn:hover {
+    background-color: #ffd0009e;
+}
+.form-group.dropdown select {
+    height: 30px;
+    font-size: 14px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+.pmf{
+    padding-bottom: 30px;
+}

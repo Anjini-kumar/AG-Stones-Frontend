@@ -1,0 +1,13 @@
+  /* Styling for the title */
+  .header {
+    background-color: black;
+    height: 100px;
+    justify-items: center;
+    align-content: center;
+    color: white;
+    font-size: 20px;          /* Large font size for the title */
+    font-weight: bold;        /* Bold title */
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;                /* Remove default margin */
+  }
