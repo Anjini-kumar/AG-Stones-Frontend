@@ -8,6 +8,7 @@ import Usermanagement from './usermanagement/usermanagement';
 import Productmanagement from './productmanagement/productmanagement';
 import Productmaster from './productmaster/productmaster';
 import Warehouse from './warehouse/warehouse';
+import Message from './message/message';
 
 
 const Login = () => {
@@ -81,7 +82,8 @@ function App() {
         <Route path="/userManagement" element={<><Navbar /><Usermanagement /></>} />
         <Route path="/productManagement" element={<><Navbar /><Productmanagement /></>} />
         <Route path="/productMaster" element={<><Navbar /><Productmaster /></>} />
-        <Route path="/warehouse" element={<><Navbar /><Warehouse /></>} /> 
+        <Route path="/warehouse" element={<><Navbar /><Warehouse /></>} />
+        <Route path="/message" element={<><Navbar /><Message /></>} />
       </Routes>
     </Router>
   );

@@ -6,12 +6,10 @@ import './productmanagement.css';
 const warehouseOptions = ["All","Cincinnati", "Raleigh", "Dallas", "Austin"]; // Corrected spelling of "Cincinnati" and "Raleigh"
 
 const ProductManagement = () => {
-    const [data, setData] = useState([]);
+const [data, setData] = useState([]);
 
-    const [searchQuery, setSearchQuery] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
-const [productMasters, setProductMasters] = useState([]);
-const [selectedProductMaster, setSelectedProductMaster] = useState(null); // To store selected ProductMaster details
+const [searchQuery, setSearchQuery] = useState('');
+const [isModalOpen, setIsModalOpen] = useState(false);
 const [selectedProduct, setSelectedProduct] = useState(null);
 const [isPopupOpen, setIsPopupOpen] = useState(false);
 const [isActionPopupOpen, setIsActionPopupOpen] = useState(false);
@@ -20,31 +18,35 @@ const [newStatus, setNewStatus] = useState('');
 const [newAction, setNewAction] = useState('');
 
 const [newProduct, setNewProduct] = useState({
-  productMaster: "", // ID of the selected product master
-  blockNo: "",
-  bundles: "",
-  uom: "",
-  thickness: "",
-  dimension: "",
-  length: "",
-  width: "",
-  quantity: "",
-  note: "",
-  offerStart: "",
-  offerEnd: "",
-  price: "",
-  warehouse: "All", // Default value for warehouse is "All"
-});
+    color_design:"",
+    blockNo: "",
+    bundles: "",
+    uom: "sft",
+    thickness: "",
+    dimension: "",
+    length: "",
+    width: "",
+    quantity: "sft",
+    note: "",
+    offerStart: "",
+    price: "",
+    warehouse: "All", // Default value for warehouse is "All"
+  });
+
+  const [productType, setProductType] = useState("");
+  const [category, setCategory] = useState("");
+  const [images, setImages] = useState([]);
+
 
 const [successMessage, setSuccessMessage] = useState("");
 const [errorMessage, setErrorMessage] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
-    const [products, setProducts] = useState([]);
+const [loading, setLoading] = useState(false);
+const [currentPage, setCurrentPage] = useState(1);
+const itemsPerPage = 5;
+const [products, setProducts] = useState([]);
 
 
-
+const userType = localStorage.getItem("user_type");
     
     const STATUS_CHOICES = [
         'Available',
@@ -99,28 +101,6 @@ const [errorMessage, setErrorMessage] = useState("");
     };
 
 
-useEffect(() => {
-    const fetchProductMasterData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("Authentication token not found");
-
-        const response = await axios.get("http://localhost:8000/api/product-master/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setProductMasters(response.data);
-      } catch (error) {
-        console.error("Error fetching product master data:", error);
-        setErrorMessage("Failed to fetch product masters.");
-      }
-    };
-
-    fetchProductMasterData();
-  }, []);
-
 
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => {
@@ -139,7 +119,6 @@ useEffect(() => {
             quantity: '',
             note: '',
             offerStart: '',
-            offerEnd: '',
             price: '',
             warehouse: '',
         });
@@ -151,67 +130,100 @@ useEffect(() => {
                 setNewProduct({ ...newProduct, [name]: value });
               };
 
-             // Handle Product Master Selection
-             const handleProductMasterChange = (e) => {
-                const selectedId = e.target.value;
-                const selectedMaster = productMasters.find((master) => master.id === parseInt(selectedId));
-                setNewProduct({ ...newProduct, productMaster: selectedId });
-                setSelectedProductMaster(selectedMaster || null); // Store selected ProductMaster details
+
+              const handleAddProduct = async (e) => {
+                e.preventDefault();
               
-                console.log(newProduct.productMaster);  // Check the value of productMaster
+                // Create a FormData object to handle file uploads along with other data
+                const formData = new FormData();
+              
+                // Append all form data fields to FormData
+                formData.append("block_no", newProduct.blockNo);
+                formData.append("bundles", newProduct.bundles);
+                formData.append("uom", newProduct.uom);
+                formData.append("thickness", parseFloat(newProduct.thickness));
+                formData.append("dimension", newProduct.dimension);
+                formData.append("length", parseFloat(newProduct.length));
+                formData.append("width", parseFloat(newProduct.width));
+                formData.append("quantity", parseInt(newProduct.quantity));
+                formData.append("note", newProduct.note);
+                formData.append("offer_start", new Date(newProduct.offerStart).toISOString());
+                formData.append("price", parseFloat(newProduct.price));
+                formData.append("warehouse", newProduct.warehouse);
+                formData.append("color_design", newProduct.color_design);
+                formData.append("category", category);
+                formData.append("product_type", productType);
+              
+                // Append each image to FormData
+                images.forEach((image) => {
+                  formData.append("images", image);
+                });
+              
+                try {
+                  const token = localStorage.getItem("token");
+                  if (!token) throw new Error("Authentication token not found");
+              
+                  // Make the POST request with FormData
+                  const response = await axios.post(
+                    "http://localhost:8000/api/product/create/",
+                    formData,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data", // Important for file uploads
+                      },
+                    }
+                  );
+              
+                  // Handle success
+                  setSuccessMessage("Product added successfully!");
+                  setErrorMessage("");
+                  setNewProduct({}); // Reset form data
+                  resetForm(); // Call your reset form function if defined
+                } catch (error) {
+                  console.error("Error adding product:", error);
+                  setErrorMessage("Failed to add product. Please check your input.");
+                  setSuccessMessage("");
+                }
               };
               
 
-const handleAddProduct = async (e) => {
-    e.preventDefault();
-    
-    const productData = {
-    product_master: newProduct.productMaster,  // Directly use the ID of the selected ProductMaster
-    block_no: newProduct.blockNo,
-    bundles: newProduct.bundles,
-    uom: newProduct.uom,
-    thickness: parseFloat(newProduct.thickness),
-    dimension: newProduct.dimension,
-    length: parseFloat(newProduct.length),
-    width: parseFloat(newProduct.width),
-    quantity: parseInt(newProduct.quantity),
-    note: newProduct.note,
-    offer_start: new Date(newProduct.offerStart).toISOString(),
-    offer_end: new Date(newProduct.offerEnd).toISOString(),
-    price: parseFloat(newProduct.price),
-    warehouse: newProduct.warehouse
-    };
-    
-    try {
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("Authentication token not found");
-
-    const response = await axios.post("http://localhost:8000/api/product/create/", productData, {
-        headers: {
-        Authorization: `Bearer ${token}`,
-        },
+const resetForm = () => {
+    setNewProduct({
+      color_design:"",
+      blockNo: "",
+      bundles: "",
+      uom: "",
+      thickness: "",
+      dimension: "",
+      length: "",
+      width: "",
+      quantity: "",
+      note: "",
+      offerStart: "",
+      offerEnd: "",
+      price: "",
+      warehouse: "All",
     });
+    setProductType("");
+    setCategory("");
+    setImages([]);
+  };
 
-    setSuccessMessage("Product added successfully!");
-    setErrorMessage("");
-    setNewProduct({ /* Reset form data here */ });
-    setSelectedProductMaster(null);
-    } catch (error) {
-    console.error("Error adding product:", error);
-    setErrorMessage("Failed to add product. Please check your input.");
-    setSuccessMessage("");
-    }
-};
-
+  const handleImageChange = (e) => {
+    setImages([...e.target.files]); // Store selected files
+  };
 
     const filteredProducts = products.filter((product) => {
-        const productName = product.product_master?.name?.toLowerCase() || '';
-        const productCategory = product.product_master?.product_category?.toLowerCase() || '';
+        const productName = product.product_type?.toLowerCase() || '';
+        const productCategory = product.category?.toLowerCase() || '';
+        const productColor = product.color_design?.toLowerCase() || '';
         
         const matchesSearchQuery = productName.includes(searchQuery.toLowerCase());
         const matchesWarehouseFilter = productCategory.includes(searchQuery.toLowerCase());
+        const matchesColorFilter = productColor.includes(searchQuery.toLowerCase());
 
-        return matchesSearchQuery && matchesWarehouseFilter;
+        return matchesColorFilter ;
     });
 
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -306,6 +318,30 @@ const handleAddProduct = async (e) => {
         setIsPopupOpen(false);
       };
 
+      const handleProductTypeChange = (e) => {
+        setProductType(e.target.value);
+        setCategory(""); // Reset category when product type changes
+      };
+
+      const getCategoryOptions = () => {
+        if (productType === "Natural") {
+          return [
+            { value: "Granite", label: "Granite" },
+            { value: "Marble", label: "Marble" },
+            { value: "Quarzite", label: "Quarzite" },
+            { value: "Dolomite", label: "Dolomite" },
+            { value: "Onyx", label: "Onyx" },
+          ];
+        } else if (productType === "Engineered") {
+          return [
+            { value: "Quartz", label: "Quartz" },
+            { value: "Porcelain", label: "Porcelain" },
+            { value: "Semi-Precious", label: "Semi-Precious" },
+            { value: "Printed Quartz", label: "Printed Quartz" },
+          ];
+        }
+        return [];
+      };
 
     return (
         <div className="product-management">
@@ -315,7 +351,7 @@ const handleAddProduct = async (e) => {
             <div className="prod-and-add">
                 <input
                     type="text"
-                    placeholder="Search by Name, Type, Category..."
+                    placeholder="Search by color"
                     className="search-inputs"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -329,46 +365,37 @@ const handleAddProduct = async (e) => {
                     <div className="modal-content">
                         <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>
                         <h2>Add New Product</h2>
+                        <br/>
+                        <br/>
+
                         <form onSubmit={handleAddProduct}>
-                            <div className="form-group">
-                                <label>Product Master:</label>
-                                <select
-                                className="form-control"
-                                name="productMaster"
-                                value={newProduct.productMaster}
-                                onChange={handleProductMasterChange}
-                                required
-                                >
-                                <option value="">Select Product Master</option>
-                                {productMasters.map((master) => (
-                                    <option key={master.id} value={master.id}>
-                                    {master.name} - {master.color_design}
-                                    </option>
-                                ))}
+                          <div className="form-group">
+                                <label>Select Product Type</label>
+                                <select value={productType} onChange={handleProductTypeChange} className="select-option">
+                                    <option value="">Select</option>
+                                    <option value="Natural">Natural</option>
+                                    <option value="Engineered">Engineered</option>
                                 </select>
                             </div>
-
-                            {selectedProductMaster && (
-                                <>
-                                <div className="form-group">
-                                    <label>Product Category:</label>
-                                    <input
-                                    type="text"
-                                    value={selectedProductMaster.product_category}
-                                    readOnly
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Color Design:</label>
-                                    <input
-                                    type="text"
-                                    value={selectedProductMaster.color_design}
-                                    readOnly
-                                    />
-                                </div>
-                                </>
-                            )}
-
+                            <div className="form-group"> 
+                                <label>Select Category</label>
+                                <select value={category} onChange={(e) => setCategory(e.target.value)} className="select-option">
+                                    <option value="">Select</option>
+                                    {getCategoryOptions().map((option) => (
+                                        <option key={option.value} value={option.value}>{option.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label>Color Design:</label>
+                                <input
+                                type="text"
+                                name="color_design"
+                                value={newProduct.color_design}
+                                onChange={handleInputChange}
+                                required
+                                />
+                            </div>
                             <div className="form-group">
                                 <label>Block No:</label>
                                 <input
@@ -392,18 +419,20 @@ const handleAddProduct = async (e) => {
                             </div>
 
                             <div className="form-group">
-                                <label>UOM:</label>
-                                <input
-                                type="text"
-                                name="uom"
-                                value={newProduct.uom}
-                                onChange={handleInputChange}
-                                required
-                                />
+                                <label htmlFor="uom">Unit Of Measure (UOM):</label>
+                                <select
+                                    name="uom"
+                                    value={newProduct.uom} // Ensure this is initialized to "square feet"
+                                    onChange={handleInputChange}
+                                    className="select-option"
+                                    readonly
+                                >
+                                    <option value="square feet">Square Feet</option> {/* Default selected option */}
+                                </select>
                             </div>
 
                             <div className="form-group">
-                                <label>Thickness:</label>
+                                <label>Thickness(cm):</label>
                                 <input
                                 type="number"
                                 name="thickness"
@@ -415,13 +444,18 @@ const handleAddProduct = async (e) => {
 
                             <div className="form-group">
                                 <label>Dimension:</label>
-                                <input
+                                <select
                                 type="text"
                                 name="dimension"
                                 value={newProduct.dimension}
                                 onChange={handleInputChange}
                                 required
-                                />
+                                className='select-option'
+                                >
+                                    <option value="">Select</option>
+                                    <option value="inches">Inches</option>
+                                    <option value="cm">Centimeters</option>
+                                </select>
                             </div>
 
                             <div className="form-group">
@@ -447,7 +481,7 @@ const handleAddProduct = async (e) => {
                             </div>
 
                             <div className="form-group">
-                                <label>Quantity:</label>
+                                <label>Quantity(sqft):</label>
                                 <input
                                 type="number"
                                 name="quantity"
@@ -468,22 +502,11 @@ const handleAddProduct = async (e) => {
                             </div>
 
                             <div className="form-group">
-                                <label>Offer Start:</label>
+                                <label>Offer</label>
                                 <input
                                 type="datetime-local"
                                 name="offerStart"
                                 value={newProduct.offerStart}
-                                onChange={handleInputChange}
-                                required
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label>Offer End:</label>
-                                <input
-                                type="datetime-local"
-                                name="offerEnd"
-                                value={newProduct.offerEnd}
                                 onChange={handleInputChange}
                                 required
                                 />
@@ -507,7 +530,7 @@ const handleAddProduct = async (e) => {
                                 name="warehouse"
                                 value={newProduct.warehouse}
                                 onChange={handleInputChange}
-                                className="form-control"
+                                className="select-option"
                                 >
                                 {warehouseOptions.map((option) => (
                                     <option key={option} value={option}>
@@ -516,7 +539,15 @@ const handleAddProduct = async (e) => {
                                 ))}
                                 </select>
                             </div>
-
+                            <div className="form-group">
+                                <label>Images:</label>
+                                <input
+                                    type="file"
+                                    multiple
+                                    onChange={handleImageChange}
+                                    accept="image/*"
+                                    />
+                            </div>
                             <div className="form-group">
                                 <button type="submit" className="submit-btn">
                                 Add Product
@@ -556,9 +587,9 @@ const handleAddProduct = async (e) => {
                         {currentItems.map((item) => (
                             <tr key={item.id}>
                                 <td>{item.id}</td>
-                                <td>{item.product_master?.name}</td>
-                                <td>{item.product_master?.product_category}</td>
-                                <td>{item.product_master?.color_design}</td>
+                                <td>{item.product_type}</td>
+                                <td>{item.category}</td>
+                                <td>{item.color_design}</td>
                                 <td>{item.block_no}</td>
                                 <td>{item.bundles}</td>
                                 <td>{item.uom}</td>
@@ -573,7 +604,8 @@ const handleAddProduct = async (e) => {
                                 <td>
                                     <button
                                         className="status-button"
-                                        onClick={() => handleStatusClick(item)}
+                                        onClick={() => userType === "Procurement" && handleStatusClick(item)}
+
                                         >
                                         {item.status || 'N/A'}
                                     </button>
@@ -581,7 +613,13 @@ const handleAddProduct = async (e) => {
                                     <td>
                                     <button
                                         className="action-button"
-                                        onClick={() => handleActionClick(item)}>    
+                                        style={{
+                                            backgroundColor: 
+                                                item.action === "Approve" ? "green" : 
+                                                item.action === "pending" ? "orange" : 
+                                                "red"
+                                        }}
+                                        >    
                                         {item.action || 'N/A'}
                                     </button>
                                     </td>

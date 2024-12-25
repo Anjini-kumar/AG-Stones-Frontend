@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './warehouse.css';
 import axios from 'axios';
-import CreateRequest from './CreateRequest';
-import RequestsList from './RequestsList';
+import CreateRequest from '../message/CreateRequest';
+import RequestsList from '../message/RequestsList';
 
 
 const Warehouse = () => {
@@ -298,8 +298,8 @@ const Warehouse = () => {
       };
 
     const filteredProducts = products.filter((product) => {
-        const productName = product.product_master?.name?.toLowerCase() || '';
-        const productCategory = product.product_master?.product_category?.toLowerCase() || '';
+        const productName = product.product_type?.toLowerCase() || '';
+        const productCategory = product.category?.toLowerCase() || '';
 
         const matchesSearchQuery = productName.includes(searchQuery.toLowerCase());
         const matchesWarehouseFilter = productCategory.includes(warehouseFilter.toLowerCase());
@@ -361,9 +361,9 @@ const Warehouse = () => {
                             {filteredProducts.map((product) => (
                                 <tr key={product.id}>
                                     <td>{product.id}</td>
-                                    <td>{product.product_master?.name || 'N/A'}</td>
-                                    <td>{product.product_master?.product_category || 'N/A'}</td>
-                                    <td>{product.product_master?.color_design || 'N/A'}</td>
+                                    <td>{product.product_type|| 'N/A'}</td>
+                                    <td>{product.category || 'N/A'}</td>
+                                    <td>{product.color_design || 'N/A'}</td>
                                     <td>{product.block_no || 'N/A'}</td>
                                     <td>{product.bundles || 'N/A'}</td>
                                     <td>{product.uom || 'N/A'}</td>
@@ -415,11 +415,11 @@ const Warehouse = () => {
                     <p>No products found.</p>
                 )}
             </div>
-            <div className="Request-container">
+            {/* <div className="Request-container">
                 {userType === 'Warehouse' && <CreateRequest />} 
                 <hr />
                 <RequestsList />
-            </div>
+            </div> */}
 
             {/* Image Popup */}
             {isImagePopupOpen && (

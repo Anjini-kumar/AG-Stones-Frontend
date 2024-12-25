@@ -294,19 +294,17 @@
 //   );
 // };
 
-// export default Navbar;
+
 import React from 'react';
-import {useNavigate, Link } from 'react-router-dom';
-import { FaSearch, FaSignOutAlt} from 'react-icons/fa';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { FaSearch, FaSignOutAlt } from 'react-icons/fa';
 import './Navbar.css';
 import logo from '../assets/AG-LOGO.png';
-import axios from 'axios';
-
-
 
 const Navbar = () => {
-  const navigate=useNavigate();
-  
+  const navigate = useNavigate();
+  const location = useLocation(); // Get the current location
+
   const handleLogout = async () => {
     const refresh = localStorage.getItem('refresh');
     try {
@@ -326,46 +324,63 @@ const Navbar = () => {
       navigate('/');
     }
   };
-  
-  const userType = localStorage.getItem('user_type')
-  // console.log(userType,"user")
 
+  const userType = localStorage.getItem('user_type');
 
   return (
-    <div>
-    {/* Main Section */}
     <div className="navbar">
-        <div className="navbar-logo">
-          <img src={logo} alt="AG STONES Logo" onClick={() => navigate("/dashboard")} />    
-        </div>
-        <div className="navbar-links">
-          {(userType == 'Warehouse')?(
-              <ul className="navbar-menu">
-              {/* <li><Link to="/dashboard">Dashboard</Link></li> */}
-              <li><Link to="/warehouse">WareHouse</Link></li>
-            </ul>
-
-           ) : (userType == 'Procurement')?(
-            <ul className="navbar-menu">
-              {/* <li><Link to="/dashboard">Dashboard</Link></li> */}
-              {/* <li><Link to="/userManagement">UserManagement</Link></li> */}
-              <li><Link to="/productManagement">ProductManagement</Link></li>
-              <li><Link to="/productMaster">ProductMaster</Link></li>
-            </ul>
-            ) :(
-              <ul className="navbar-menu">
-              <li><Link to="/dashboard">Dashboard</Link></li>
-              <li><Link to="/userManagement">UserManagement</Link></li>
-              <li><Link to="/productManagement">ProductManagement</Link></li>
-              <li><Link to="/productMaster">ProductMaster</Link></li>
-              <li><Link to="/warehouse">WareHouse</Link></li>
-            </ul>
-          )}
-        </div>
-        <button className="logout-button" onClick={handleLogout} ><FaSignOutAlt /> Logout</button>
-    </div>
-    </div>
-    
+      <div className="navbar-logo" onClick={() => navigate("/dashboard")}>
+        <img src={logo} alt="AG STONES Logo" />
+      </div>
+      <div className="navbar-links">
+        {userType === 'Warehouse' ? (
+          <ul className="navbar-menu">
+            <li>
+              <Link to="/warehouse" className={location.pathname === '/warehouse' ? 'active' : ''}>WareHouse</Link>
+            </li>
+            <li>
+              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''}>Message</Link>
+            </li>
+          </ul>
+        ) : userType === 'Procurement' ? (
+          <ul className="navbar-menu">
+            <li>
+              <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''}>ProductManagement</Link>
+            </li>
+            <li>
+              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''}>ProductMaster</Link>
+            </li>
+            <li>
+              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''}>Message</Link>
+            </li>
+          </ul>
+        ) : (
+          <ul className="navbar-menu">
+            <li>
+              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/userManagement" className={location.pathname === '/userManagement' ? 'active' : ''}>User  Management</Link>
+            </li>
+            <li>
+              <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''}>ProductManagement</Link>
+            </li>
+            <li>
+              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''}>ProductMaster</Link>
+            </li>
+            <li>
+              <Link to="/warehouse" className={location.pathname === '/warehouse' ? 'active' : ''}>WareHouse</Link>
+            </li>
+            <li>
+              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''}>Message</Link>
+            </li>
+          </ul>
+        )}
+      </div>
+      <button className="logout-button" onClick={handleLogout}>
+        <FaSignOutAlt /> Logout
+      </button>
+  </div>
   );
 };
 

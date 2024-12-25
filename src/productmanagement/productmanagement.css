@@ -140,6 +140,20 @@
     border-radius: 4px;
 }
 
+.select-option {
+    height: 40px; /* Adjust the height as needed */
+    padding: 5px; /* Optional: Add padding for better spacing */
+    font-size: 16px; /* Optional: Increase font size for better readability */
+    border: 1px solid #ccc; /* Optional: Add border for better visibility */
+    border-radius: 4px; /* Optional: Add rounded corners */
+    background-color: #fff; /* Optional: Set background color */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Optional: Increase the height of the dropdown options */
+.select-option option {
+    height: 40px; /* Adjust the height of each option */
+}
 .submit-btn {
     background-color: #ffd200;
     align-items: center;
