@@ -180,6 +180,7 @@ const userType = localStorage.getItem("user_type");
                   setErrorMessage("");
                   setNewProduct({}); // Reset form data
                   resetForm(); // Call your reset form function if defined
+                  handleCloseModal();
                 } catch (error) {
                   console.error("Error adding product:", error);
                   setErrorMessage("Failed to add product. Please check your input.");
@@ -190,20 +191,19 @@ const userType = localStorage.getItem("user_type");
 
 const resetForm = () => {
     setNewProduct({
-      color_design:"",
-      blockNo: "",
-      bundles: "",
-      uom: "",
-      thickness: "",
-      dimension: "",
-      length: "",
-      width: "",
-      quantity: "",
-      note: "",
-      offerStart: "",
-      offerEnd: "",
-      price: "",
-      warehouse: "All",
+        color_design:"",
+        blockNo: "",
+        bundles: "",
+        uom: "sft",
+        thickness: "",
+        dimension: "",
+        length: "",
+        width: "",
+        quantity: "sft",
+        note: "",
+        offerStart: "",
+        price: "",
+        warehouse: "All",
     });
     setProductType("");
     setCategory("");
@@ -363,7 +363,7 @@ const resetForm = () => {
              {isModalOpen && (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>
+                        <span className="close" onClick={handleCloseModal}>&times;</span>
                         <h2>Add New Product</h2>
                         <br/>
                         <br/>

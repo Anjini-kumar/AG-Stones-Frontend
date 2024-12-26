@@ -321,6 +321,8 @@ const Navbar = () => {
     } finally {
       localStorage.removeItem('token');
       localStorage.removeItem('refresh');
+      localStorage.removeItem('user');
+      localStorage.removeItem('user_type')
       navigate('/');
     }
   };
