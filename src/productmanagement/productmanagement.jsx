@@ -55,7 +55,7 @@ const userType = localStorage.getItem("user_type");
         'Awaiting Stock',
       ];
       const ACTION_CHOICES = [
-          'Approve',
+          'Approved',
           'Reject',
       ]
 
@@ -615,9 +615,9 @@ const resetForm = () => {
                                         className="action-button"
                                         style={{
                                             backgroundColor: 
-                                                item.action === "Approve" ? "green" : 
-                                                item.action === "pending" ? "orange" : 
-                                                "red"
+                                                item.action === "Approved" ? "green" : 
+                                                item.action === "Rejected" ? "red" : 
+                                                "orange"
                                         }}
                                         >    
                                         {item.action || 'N/A'}

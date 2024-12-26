@@ -33,8 +33,8 @@ const Warehouse = () => {
       'Awaiting Stock',
     ];
     const ACTION_CHOICES = [
-        'Approve',
-        'Reject',
+        'Approved',
+        'Rejected',
     ]
 
     // Fetch products from the backend
@@ -395,6 +395,12 @@ const Warehouse = () => {
                                     <td>
                                     <button
                                         className="action-button"
+                                        style={{
+                                            backgroundColor: 
+                                                product.action === "Approved" ? "green" : 
+                                                product.action === "Rejected" ? "red" : 
+                                                "orange"
+                                        }}
                                         onClick={() => handleActionClick(product)}>
                                         {product.action || 'N/A'}
                                     </button>
