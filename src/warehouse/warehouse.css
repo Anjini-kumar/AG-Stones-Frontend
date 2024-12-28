@@ -1,30 +1,39 @@
 /* Container and Title */
 .warehouse-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-}
-
-.warehouse-title {
-    font-size: 24px;
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Search Filters */
-.search-filters {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
+    height: 80vh;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 90%; 
+    width: 100%;
+    overflow: hidden; 
 }
 
-.search-input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 48%;
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Stack items for smaller screens */
+        align-items: stretch; /* Make children take full width */
+        padding: 10px;
+    }
+
+    .filter {
+        margin-bottom: 10px; /* Add spacing between filter and other elements */
+    }
+
+    .search-input {
+        width: 100%; /* Expand to full width on smaller screens */
+    }
+}
+
 
 /* Table Styling */
 .product-table {
@@ -307,52 +316,132 @@
     cursor: pointer;
     border-radius: 4px;
   }
-  
-  .popup {
+  /* General popup styling */
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    text-align: center;
-  }
-  
-  .popup-content h3 {
-    margin-bottom: 10px;
-  }
-  
-  .status-option {
-    display: block;
     width: 100%;
-    margin: 5px 0;
-    padding: 8px;
-    background-color: #f1f1f1;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Headings */
+.popup-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Current Status Paragraph */
+.popup-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #666;
+}
+
+/* Status buttons container */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Individual status buttons */
+.status-option {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
     border: none;
-    cursor: pointer;
     border-radius: 4px;
-  }
-  
-  .status-option.selected {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .popup-content button {
-    margin: 5px;
-    padding: 8px 12px;
+    background-color: #f0f0f0;
+    color: #333;
     cursor: pointer;
-  }
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.status-option:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.status-option.selected {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+}
+
+/* Save and Cancel buttons */
+.popup-content button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.popup-content button:hover {
+    transform: translateY(-2px);
+}
+
+.popup-content button:active {
+    transform: translateY(1px);
+}
+
+button:nth-of-type(1) {
+    background-color: #007bff;
+    color: #fff;
+}
+
+button:nth-of-type(1):hover {
+    background-color: #0056b3;
+}
+
+button:nth-of-type(2) {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+button:nth-of-type(2):hover {
+    background-color: #e2e6ea;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .popup-content {
+        padding: 1.5rem;
+    }
+
+    .status-option {
+        font-size: 0.9rem;
+    }
+
+    .popup-content button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
   
   .action-button {
     background-color: #007bff;

@@ -1,16 +1,15 @@
-/* Navbar.css */
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffff;
-  padding: 30px 30px;
+  background-color: #fff;
+  padding: 2rem 2.5rem;
   box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap; /* Allow wrapping for small screens */
 }
 
 .navbar-logo img {
-  height: 50px;
+  height: 5rem; /* Responsive height */
   cursor: pointer;
 }
 
@@ -18,16 +17,20 @@
   flex-grow: 1;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* Allow menu items to wrap */
 }
 
 .navbar-menu {
   list-style: none;
   display: flex;
-  gap: 20px;
- }
+  gap: 2rem;
+  flex-wrap: wrap; /* Wrap items for smaller screens */
+  justify-content: center; /* Center items */
+}
 
 .navbar-menu li {
   position: relative;
+  padding: 0.5rem;
 }
 
 .navbar-menu li a {
@@ -35,6 +38,8 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
 }
 
 .navbar-menu li a:hover {
@@ -42,18 +47,21 @@
 }
 
 .navbar-menu li a.active {
-  color: #ffd200; /* Highlight color for the active link */
-  font-weight: bold; /* Make the active link bold */
+  color: #ffd200;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
 }
 
 .logout-button {
   background-color: #f0f0f0;
   color: black;
-  border: 1 solid black;
-  padding: 10px 15px;
-  border-radius: 5px;
+  border: 1px solid black;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
   cursor: pointer;
+  font-size: 1.2rem; /* Adjusted font size */
   transition: background-color 0.3s;
+  margin-right: 1rem;
 }
 
 .logout-button:hover {
@@ -61,24 +69,48 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .navbar-logo img {
+    height: 4rem; /* Adjust logo size for smaller screens */
   }
 
   .navbar-links {
-    width: 100%;
-    justify-content: flex-start;
+    flex-grow: 0;
+    width: 100%; /* Take full width */
+    text-align: center;
   }
 
   .navbar-menu {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: column; /* Stack menu items vertically */
+    gap: 1rem; /* Reduce spacing */
+  }
+
+  .navbar-menu li a {
+    font-size: 1.2rem; /* Smaller font size */
   }
 
   .logout-button {
-    width: 100%;
-    margin-top: 10px;
+    margin-top: 1rem; /* Add spacing from menu */
+    font-size: 1rem; /* Smaller font size */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-menu {
+    gap: 0.5rem; /* Further reduce spacing */
+  }
+
+  .navbar-menu li a {
+    font-size: 1rem; /* Further smaller font size */
+  }
+
+  .logout-button {
+    padding: 0.3rem 0.8rem; /* Adjust padding */
   }
 }

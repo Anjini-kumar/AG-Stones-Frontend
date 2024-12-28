@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchRequests, createReply } from "../Apis/endpoints";
+import CreateRequest from './CreateRequest';
+
 
 const RequestsList = () => {
   const [requests, setRequests] = useState([]);
@@ -8,6 +10,8 @@ const RequestsList = () => {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [filterId, setFilterId] = useState("");
   const userType = localStorage.getItem("user_type");
+  const user = localStorage.getItem("user");
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const getRequests = async () => {
@@ -47,27 +51,57 @@ const RequestsList = () => {
     }
   };
 
+  const togglePopup = () => {
+  setShowPopup(!showPopup);
+};
+
   return (
-    <div style={{ margin: "1rem", fontFamily: "Arial, sans-serif" }}>
-      <h1 style={{ textAlign: "center" }}>Requests</h1>
-      <div style={{ marginBottom: "1rem", textAlign: "center" }}>
+    <div style={{  fontFamily: "Arial, sans-serif" }}>
+      <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
+        Welcome to the Requests <span style={{color:"blue"}}>{user}</span> !!
+      </h1>
+
+      {/* Filter Section */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <input
           type="text"
           value={filterId}
           onChange={handleFilterChange}
-          placeholder="Filter by ID"
+          placeholder="Filter by Request ID"
           style={{
-            padding: "0.5rem",
+            padding: "0.8rem",
             width: "50%",
-            maxWidth: "300px",
-            borderRadius: "5px",
+            maxWidth: "400px",
+            borderRadius: "25px",
             border: "1px solid #ccc",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            marginLeft:"1.5rem"
+
           }}
         />
+        {userType === 'Warehouse' && <button
+          style={{
+            padding: "0.8rem 1.2rem",
+            backgroundColor: "#3498db",
+            color: "#fff",
+            border: "none",
+            borderRadius: "25px",
+            cursor: "pointer",
+            transition: "background-color 0.3s ease",
+            marginRight:"1.5rem"
+
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#2980b9")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#3498db")}
+          onClick={togglePopup}
+        >
+          Add Request
+        </button>}
       </div>
 
+      {/* Requests Section */}
       {filteredRequests.length === 0 ? (
-        <p style={{ textAlign: "center" }}>No requests found.</p>
+        <p style={{ textAlign: "center", color: "#7f8c8d", fontSize: "1.2rem" }}>No requests found.</p>
       ) : (
         filteredRequests.map((request) => (
           <div
@@ -75,28 +109,50 @@ const RequestsList = () => {
             style={{
               border: "1px solid #ddd",
               borderRadius: "8px",
-              padding: "1rem",
-              marginBottom: "1rem",
-              backgroundColor: "#f9f9f9",
+              padding: "1.5rem",
+              marginBottom: "1.5rem",
+              backgroundColor: "#ffffff",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             }}
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#ecf0f1")}
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#f9f9f9")}
           >
-            <h2 style={{ marginBottom: "0.5rem" }}>Request id :{request.id}</h2>
-            <h3>Request by: {request.raised_by_name}</h3>
-            <p>Request Type: {request.status}</p>
-            <p>{request.message}</p>
-            <p>Created At: {new Date(request.created_at).toLocaleString()}</p>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <h2 style={{ marginBottom: "0.5rem", color: "#34495e" }}>Request ID: {request.id}</h2>
+                <h3 style={{ marginBottom: "0.5rem", color: "#2c3e50" }}>Requested by: {request.raised_by_name}</h3>
+                <p style={{ marginBottom: "0.5rem", color: "#2c3e50" }}>Subject: {request.subject}</p>
+                <p style={{ color: "#95a5a6" }}>Status: {request.status}</p>
+              </div>
+              <p style={{ color: "#bdc3c7", fontSize: "0.9rem" }}>
+                {new Date(request.created_at).toLocaleString()}
+              </p>
+            </div>
 
-            <div style={{ marginTop: "1rem" }}>
-              <h4>Replies:</h4>
+            <p style={{ color: "#2c3e50", margin: "1rem 0" }}>{request.message}</p>
+
+            {/* Replies Section */}
+            <div>
+              <h4 style={{ color: "#34495e", marginBottom: "1rem" }}>Replies:</h4>
               {request.replies.length === 0 ? (
-                <p>No replies yet.</p>
+                <p style={{ color: "#7f8c8d" }}>No replies yet.</p>
               ) : (
                 request.replies.map((reply) => (
-                  <div key={reply.id} style={{ marginBottom: "0.5rem" }}>
-                    <p>
+                  <div
+                    key={reply.id}
+                    style={{
+                      padding: "0.8rem",
+                      marginBottom: "0.8rem",
+                      backgroundColor: "#ecf0f1",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <p style={{ color: "#2c3e50", marginBottom: "0.3rem" }}>
                       <strong>{reply.replied_by}:</strong> {reply.message}
                     </p>
-                    <p>{new Date(reply.created_at).toLocaleString()}</p>
+                    <p style={{ color: "#95a5a6", fontSize: "0.9rem" }}>
+                      {new Date(reply.created_at).toLocaleString()}
+                    </p>
                   </div>
                 ))
               )}
@@ -158,25 +214,55 @@ const RequestsList = () => {
           </div>
         ))
       )}
+      {/* Popup for CreateRequest */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={togglePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "-18rem",
+                background: "transparent",
+                border: "none",
+                fontSize: "1.5rem",
+                cursor: "pointer",
+              }}
+              onClick={togglePopup}
+            >
+              ×
+            </button>
+            <CreateRequest />
+          </div>
+        </div>
+      )}
 
-      <style jsx>{`
-        @media (max-width: 768px) {
-          h3 {
-            font-size: 1.2rem;
-          }
-          p {
-            font-size: 0.9rem;
-          }
-          button {
-            font-size: 0.9rem;
-          }
-          input {
-            width: 100%;
-          }
+<style jsx>{`
+        .popup-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        .popup-content {
+          background: #fff;
+          padding: 2rem;
+          border-radius: 8px;
+          width: 90%;
+          max-width: 600px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          position: relative;
         }
       `}</style>
     </div>
   );
 };
+
 
 export default RequestsList;

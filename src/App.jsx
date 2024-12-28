@@ -9,7 +9,7 @@ import Productmanagement from './productmanagement/productmanagement';
 import Productmaster from './productmaster/productmaster';
 import Warehouse from './warehouse/warehouse';
 import Message from './message/message';
-
+import ReorderList from './Reorder/Reorder';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -72,6 +72,10 @@ const Login = () => {
   );
 };
 
+
+
+
+
 function App() {
   return (
     <Router>
@@ -84,6 +88,7 @@ function App() {
         <Route path="/productMaster" element={<><Navbar /><Productmaster /></>} />
         <Route path="/warehouse" element={<><Navbar /><Warehouse /></>} />
         <Route path="/message" element={<><Navbar /><Message /></>} />
+        <Route path="/record" element={<><Navbar /><ReorderList /></>} />
       </Routes>
     </Router>
   );

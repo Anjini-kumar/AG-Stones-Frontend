@@ -309,24 +309,31 @@ const Warehouse = () => {
 
     return (
         <div className="warehouse-container">
-            <h3 className="warehouse-title">Welcome {user} to the Warehouse!</h3>
-            <div className="search-filters">
-                <input
-                    type="text"
-                    placeholder="Search by Product Name..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="search-input"
-                />
+            <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
+                Welcome to the Warehouse <span style={{color:"blue"}}>{user}</span> !!
+            </h1>  
+            <div className="header">
                 <input
                     type="text"
                     placeholder="Search by Product Category..."
                     value={warehouseFilter}
                     onChange={(e) => setWarehouseFilter(e.target.value)}
                     className="search-input"
+                    style={{
+                        padding: "0.8rem",
+                        width: "50%",
+                        marginTop:"-6rem",
+                        marginLeft:"1.5rem",
+                        fontSize:"1rem",
+                        maxWidth: "400px",
+                        borderRadius: "25px",
+                        border: "1px solid #ccc",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      }}
                 />
             </div>
             <div className="table-container">
+                <h2 style={{marginLeft:"2.2rem" , marginTop:"-6rem"}}>Products List</h2>
                 {loading ? (
                     <p>Loading products...</p>
                 ) : error ? (
@@ -336,12 +343,10 @@ const Warehouse = () => {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Product<br />Type</th>
                                 <th>Product<br />Category</th>
                                 <th>Color/<br />Design</th>
                                 <th>Block<br />No.</th>
                                 <th>No. of Bundles</th>
-                                <th>UOM</th>
                                 <th>Thick</th>
                                 <th>Dmsn<br />(In/cm)</th>
                                 <th>Length</th>
@@ -349,7 +354,6 @@ const Warehouse = () => {
                                 <th>QTY<br />(SFT)</th>
                                 <th>Note</th>
                                 <th>Offer </th>
-                                {/* <th>Offer End Time</th> */}
                                 <th>Price/<br />Sft</th>
                                 <th>Img</th>
                                 <th>Status</th>
@@ -361,12 +365,10 @@ const Warehouse = () => {
                             {filteredProducts.map((product) => (
                                 <tr key={product.id}>
                                     <td>{product.id}</td>
-                                    <td>{product.product_type|| 'N/A'}</td>
                                     <td>{product.category || 'N/A'}</td>
                                     <td>{product.color_design || 'N/A'}</td>
                                     <td>{product.block_no || 'N/A'}</td>
                                     <td>{product.bundles || 'N/A'}</td>
-                                    <td>{product.uom || 'N/A'}</td>
                                     <td>{product.thickness || 'N/A'}</td>
                                     <td>inches</td>
                                     <td>{product.length || 'N/A'}</td>
@@ -374,7 +376,6 @@ const Warehouse = () => {
                                     <td>{product.quantity || 'N/A'}</td>
                                     <td>{product.note || 'N/A'}</td>
                                     <td>{product.offer_start || 'N/A'}</td>
-                                    {/* <td>{product.offer_end || 'N/A'}</td> */}
                                     <td>{product.price || 'N/A'}</td>
                                     <td>
                                         <button
@@ -421,17 +422,11 @@ const Warehouse = () => {
                     <p>No products found.</p>
                 )}
             </div>
-            {/* <div className="Request-container">
-                {userType === 'Warehouse' && <CreateRequest />} 
-                <hr />
-                <RequestsList />
-            </div> */}
 
             {/* Image Popup */}
             {isImagePopupOpen && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                        <button onClick={closeImagePopup} className="close-popup">✖</button>
                         <h3>Images</h3>
                         <div>
                             <div className="image-gallery">
@@ -467,6 +462,8 @@ const Warehouse = () => {
                         <button onClick={handleAddImage} className="add-image-button">
                             Add Image
                         </button>
+                        <button onClick={closeImagePopup}>Close</button>
+
                     </div>
                 </div>
             )}
@@ -490,7 +487,7 @@ const Warehouse = () => {
                             </li>
                         ))}
                         </ul>
-                        <button onClick={handleSaveStatus}>Save</button>
+                        <button onClick={handleSaveStatus} style={{backgroundColor:"green"}}>Save</button>
                         <button onClick={handleStatusClosePopup}>Cancel</button>
                     </div>
                     </div>
@@ -516,7 +513,7 @@ const Warehouse = () => {
                             </li>
                         ))}
                         </ul>
-                        <button onClick={handleSaveAction}>Save</button>
+                        <button onClick={handleSaveAction} style={{backgroundColor:"green"}} >Save</button>
                         <button onClick={handleActionClosePopup}>Cancel</button>
                     </div>
                     </div>
@@ -526,9 +523,7 @@ const Warehouse = () => {
             {isCommentPopupOpen && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                        <button className="close-popup" onClick={closeCommentPopup}>
-                            ✖
-                        </button>
+
                         <h3>Add Comment for Product ID: {selectedProduct?.id}</h3>
                         <textarea
                             value={newComment}
@@ -536,9 +531,11 @@ const Warehouse = () => {
                             rows="5"
                             className="comment-textarea"
                         ></textarea>
-                        <button className="submit-comment-button" onClick={handleCommentSubmit}>
+                        <button className="submit-comment-button" onClick={handleCommentSubmit} style={{backgroundColor:"green"}} >
                             Submit
                         </button>
+                        <button  onClick={closeCommentPopup}>Cancel</button>
+
                     </div>
                 </div>
             )}

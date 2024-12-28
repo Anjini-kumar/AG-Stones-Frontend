@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 90%; 
+    width: 100%;
+    overflow: hidden; 
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+
+
+.create-button {
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+.create-button:hover {
+    background-color: #218838;
+}
+
+.reorder-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reorder-table th, .reorder-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.reorder-table th {
+    background-color: #f4f4f4;
+}
+
+.reorder-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.reorder-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.popup-content h2 {
+    margin-bottom: 20px;
+}
+
+.popup-content select, .popup-content input, .popup-content button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-content .close-button {
+    background-color: #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+.popup-content .close-button:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter, .create-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .popup-content {
+        width: 90%;
+    }
+}

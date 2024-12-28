@@ -1,17 +1,3 @@
-import { HttpStatusCode } from "axios"
-
-export const BASE_URL = "http://127.0.0.1:8000";
-
-
-
-export const endpoints = {
-   INDEX: "/index_view/",
-   SIGNIN:  "/api/login/",
-   SIGNUP: "/api/register/",
-
-}
-
-
 import axios from "axios";
 
 const API_BASE_URL = "http://127.0.0.1:8000/api"; 
@@ -39,3 +25,13 @@ export const createReply = async (data) => {
   const response = await apiClient.post("/replies/create/", data);
   return response.data;
 };
+
+export const CreateReorder = async (data) => {
+  const response = await apiClient.post("/reorders/create/", data);
+  return response.data;
+};
+
+export const fetchReorders = async () => {
+  const response = await apiClient.get("/reorders/");
+  return response.data;
+  };

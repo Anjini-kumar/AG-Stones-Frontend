@@ -67,15 +67,19 @@ const Usermanagement = () => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:8000/api/users/${userId}/`, {
+        const response = await axios.delete(`http://localhost:8000/api/users/${userId}/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUsers(users.filter((user) => user.id !== userId));
+        if (response.status === 204) {
+          setUsers(users.filter((user) => user.id !== userId));
+          alert('User successfully deleted.');
+        }
       } catch (error) {
-        console.error('Error deleting user:', error);
+        console.error('Error deleting user:', error.response?.data || error.message);
+        alert(error.response?.data?.detail || 'Failed to delete user.');
       }
     }
-  };
+  };  
 
   const handleSaveUser = async (updatedUser) => {
     try {
@@ -110,12 +114,33 @@ const Usermanagement = () => {
         <input 
           type="text" 
           placeholder="Search by User Name..." 
-          className="search-input" 
+          style={{
+            padding: "0.8rem",
+            width: "50%",
+            maxWidth: "400px",
+            borderRadius: "25px",
+            border: "1px solid #ccc",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}  
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)} 
         />
-        <button onClick={toggleAddUserForm} className="add-user-btn">+ Add User</button>
+        <button onClick={toggleAddUserForm} 
+        style={{
+            padding: "0.8rem 1.2rem",
+            backgroundColor: "#3498db",
+            color: "#fff",
+            border: "none",
+            borderRadius: "25px",
+            cursor: "pointer",
+            transition: "background-color 0.3s ease",
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#2980b9")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#3498db")}>
+            Add User
+        </button>
       </div>
+
       <table className="user-table">
         <thead>
           <tr>
@@ -138,7 +163,10 @@ const Usermanagement = () => {
               <td>{user.gender}</td>
               <td>{user.user_type}</td>
               <td>
-                <button onClick={() => toggleDropdown(user.id)} className="action-btn">
+                <button onClick={() => toggleDropdown(user.id)} className="action-btn" style={{
+                  backgroundColor:"white",
+                  color:"#3498db",
+                }}>
                   <FaEllipsisV />
                 </button>
                 {dropdownOpen === user.id && (
