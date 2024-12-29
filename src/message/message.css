@@ -8,14 +8,15 @@ html, body {
 .message {
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: 85vh;
     background-color: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
     margin: 2rem auto;
-    max-width: 90%; 
+    max-width: 95%;
     width: 100%;
-    overflow: hidden; 
+    overflow: hidden;
+    padding: 1rem;
 }
 
 .message__header {

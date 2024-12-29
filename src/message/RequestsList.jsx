@@ -218,20 +218,11 @@ const RequestsList = () => {
       {showPopup && (
         <div className="popup-overlay" onClick={togglePopup}>
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <button
-              style={{
-                position: "absolute",
-                top: "15px",
-                right: "-18rem",
-                background: "transparent",
-                border: "none",
-                fontSize: "1.5rem",
-                cursor: "pointer",
-              }}
-              onClick={togglePopup}
-            >
-              ×
-            </button>
+
+            <p style={{
+              color:"gray"
+
+            }}>*click outside the popup to close*</p>
             <CreateRequest />
           </div>
         </div>

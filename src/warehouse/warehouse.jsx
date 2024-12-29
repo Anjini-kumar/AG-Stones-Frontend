@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './warehouse.css';
 import axios from 'axios';
-import CreateRequest from '../message/CreateRequest';
-import RequestsList from '../message/RequestsList';
+
 
 
 const Warehouse = () => {
@@ -318,17 +317,15 @@ const Warehouse = () => {
                     placeholder="Search by Product Category..."
                     value={warehouseFilter}
                     onChange={(e) => setWarehouseFilter(e.target.value)}
-                    className="search-input"
                     style={{
                         padding: "0.8rem",
                         width: "50%",
-                        marginTop:"-6rem",
-                        marginLeft:"1.5rem",
-                        fontSize:"1rem",
                         maxWidth: "400px",
                         borderRadius: "25px",
                         border: "1px solid #ccc",
                         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                        marginLeft:"1.5rem"
+            
                       }}
                 />
             </div>

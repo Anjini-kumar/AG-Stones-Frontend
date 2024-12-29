@@ -67,7 +67,7 @@ const Usermanagement = () => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.delete(`http://localhost:8000/api/users/${userId}/`, {
+        const response = await axios.delete(`http://localhost:8000/api/users1/${userId}/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (response.status === 204) {
@@ -140,6 +140,7 @@ const Usermanagement = () => {
             Add User
         </button>
       </div>
+      <div class="user-table-container">
 
       <table className="user-table">
         <thead>
@@ -181,6 +182,7 @@ const Usermanagement = () => {
           ))}
         </tbody>
       </table>
+      </div>
 
       {isAddUserFormOpen && (
         <div className="modal-overlay">

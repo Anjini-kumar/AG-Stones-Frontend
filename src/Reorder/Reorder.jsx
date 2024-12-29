@@ -100,7 +100,8 @@ const ReorderList = () => {
                     </button>
                 )}
             </div>
-            <table className="reorder-table">
+            <div className='table-container'>
+            <table className="product-table">
                 <thead>
                     <tr>
                         <th>Category</th>
@@ -120,7 +121,7 @@ const ReorderList = () => {
                     ))}
                 </tbody>
             </table>
-
+            </div>
             {isPopupOpen && (
                 <div className="popup">
                     <div className="popup-content">
@@ -128,12 +129,13 @@ const ReorderList = () => {
                         <button
                         style={{
                             position: "absolute",
-                            top: "10px",
-                            right: "-12rem",
+                            top: "5px",
+                            right: "-11rem",
                             background: "transparent",
                             border: "none",
                             fontSize: "1.5rem",
                             cursor: "pointer",
+                            color:"black",
                         }}
                         onClick={() => setIsPopupOpen(false)}
                         >
@@ -166,7 +168,10 @@ const ReorderList = () => {
                             value={newReorder.bundles}
                             onChange={(e) => setNewReorder({ ...newReorder, bundles: e.target.value })}
                         />
-                        <button onClick={handleCreateReorder}>Create</button>
+                        <button onClick={handleCreateReorder} style={{
+                            backgroundColor:"blue",
+                            color:"white"
+                        }}>Create</button>
                     </div>
                 </div>
             )}

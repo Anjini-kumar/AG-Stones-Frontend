@@ -1,0 +1,129 @@
+html {
+    font-size: 1rem; /* Base font size for rem units */
+  }
+  
+  @media (max-width: 768px) {
+    html {
+      font-size: 0.875rem; /* Adjust font size for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    html {
+      font-size: 0.75rem; /* Adjust font size for extra small screens */
+    }
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .loginpage {
+    font-family: Arial, sans-serif;
+    background: url('./assets/Granite quarry1.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgba(75, 75, 75, 0.5);
+  }
+  
+  .login-form {
+    background: rgba(255, 255, 255, 1);
+    padding: 2rem;
+    border-radius: 0.625rem; /* 10px */
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* 10px */
+    text-align: center;
+    width: 90%; /* Adjust for responsiveness */
+    max-width: 22.5rem; /* 360px */
+    height: auto;
+  }
+  
+  .logo {
+    width: 7.5rem; /* 120px */
+    height: auto;
+    margin-bottom: 1.25rem; /* 20px */
+  }
+  
+
+  
+  .form-group {
+    margin: auto;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    width: 85%;
+    transform: translateY(-0.5rem);
+    border-radius: 0.5rem;
+    border: none;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.625rem; /* 10px */
+    margin: 0.625rem 0; /* 10px */
+    border: 1px solid #ccc;
+    border-radius: 0.3125rem; /* 5px */
+    height: 2rem;
+    border-bottom: 2px solid rgb(245, 204, 25);
+    border-right: 2px solid rgb(245, 204, 25);
+    outline: none;
+    transition: border-color 0.3s;
+    letter-spacing: 0.05rem;
+  }
+  
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    outline: none;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 0.625rem; /* 10px */
+  }
+  
+  .captcha {
+    transform: translateY(-1rem);
+  }
+  
+  .login-button {
+    font-size: 1.875rem; /* 30px */
+    font-weight: 500;
+    color: black;
+    margin: 0;
+    padding: 0.5rem 0; /* 15px */
+    background-color: rgb(245, 204, 25);
+    width: 60%;
+    max-width: 16.25rem; /* 260px */
+    text-align: center;
+    margin: auto;
+    border-radius: 0.625rem; /* 10px */
+    transform: translateY(-1.5rem);
+  }
+  
+  .login-button:hover {
+    background-color: rgb(230, 190, 20);
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.875rem; /* 14px */
+    margin-top: 0.5rem;
+  }
+  

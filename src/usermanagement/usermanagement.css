@@ -1,14 +1,15 @@
 .user-management-container {
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 85vh;
   background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   margin: 2rem auto;
-  max-width: 90%; 
+  max-width: 95%;
   width: 100%;
-  overflow: hidden; 
+  overflow: hidden;
+  padding: 1rem;
 }
 
 .user-management-container h1 {
@@ -26,8 +27,8 @@
 }
 
 .search-input {
-  flex-grow: 1; 
-  margin-right: 1rem; 
+  flex-grow: 1;
+  margin-right: 1rem;
   border: 0.1rem solid #ccc;
   padding: 0.8rem;
   font-size: 1.6rem;
@@ -50,47 +51,32 @@
   background-color: #ffd0009e;
 }
 
-/* Reduced font sizes and improved responsiveness */
+/* Table container with scrolling */
+.user-table-container {
+  width: 100%;
+  max-height: 60vh; 
+  overflow: auto; 
+}
 
 .user-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 2rem;
-  font-size: 1rem; /* Reduced font size for table */
+  font-size: 1rem;
+  min-width: 800px; 
 }
 
 .user-table th,
-.user-table td {  
-  padding: 1rem; /* Adjusted padding for consistency */
+.user-table td {
+  padding: 1rem;
   text-align: left;
   border: 0.1rem solid #ddd;
 }
 
 .user-table th {
   background-color: #f2f2f2;
-  font-size: 1.1rem; /* Slightly larger font size for headers */
+  font-size: 1.1rem;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .user-table {
-    font-size: 0.9rem; /* Smaller font size for medium screens */
-  }
-
-  .user-table th, .user-table td {
-    padding: 0.8rem; /* Reduced padding for smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .user-table {
-    font-size: 0.8rem; /* Smaller font size for very small screens */
-  }
-
-  .user-table th, .user-table td {
-    padding: 0.6rem; /* Further reduced padding for compactness */
-  }
-}
 
 /* Action button styling */
 .action-btn {
@@ -121,6 +107,7 @@
   background-color: #f2f2f2;
 }
 
+/* Modal Styling */
 .modal-overlay {
   display: flex;
   align-items: center;
@@ -156,8 +143,14 @@
   color: #000;
 }
 
-/* Responsive styles */
+/* Mobile and Tablet Responsiveness */
+
+/* Medium Screens */
 @media (max-width: 768px) {
+  .user-management-container {
+    padding: 1.5rem;
+  }
+
   .search-and-add {
     flex-direction: column;
     gap: 1.5rem;
@@ -165,10 +158,21 @@
 
   .add-user-btn {
     width: 100%;
+    padding: 1rem;
+  }
+  .user-table-container {
+    width: 100%;
+    max-height: 60vh; 
+    overflow: auto; 
   }
 
-  .user-table th, .user-table td {
-    padding: 1rem;
+  .user-table {
+    font-size: 0.9rem; /* Smaller font size for medium screens */
+  }
+
+  .user-table th,
+  .user-table td {
+    padding: 1rem; /* Reduced padding for smaller screens */
   }
 
   .modal-content {
@@ -176,6 +180,7 @@
   }
 }
 
+/* Small Screens */
 @media (max-width: 480px) {
   .user-management-container {
     padding: 1rem;
@@ -193,8 +198,31 @@
   .action-btn {
     font-size: 1.4rem;
   }
+  .user-table-container {
+    width: 100%;
+    max-height: 60vh; 
+    overflow: auto; 
+  }
+
+  .user-table {
+    font-size: 0.8rem; 
+  }
+
+  .user-table th,
+  .user-table td {
+    padding: 0.6rem; 
+  }
 
   .modal-content {
     max-width: 90%;
+    padding: 1rem;
+  }
+
+  .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5); 
+  }
+
+  .close-btn {
+    font-size: 2rem; /* Smaller close button */
   }
 }

@@ -2,14 +2,15 @@
 .product-master-container {
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: 85vh;
     background-color: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
     margin: 2rem auto;
-    max-width: 90%; 
+    max-width: 95%;
     width: 100%;
-    overflow: hidden; 
+    overflow: hidden;
+    padding: 1rem;
 }
 
 .product-master-title {
@@ -23,18 +24,22 @@
 /* Input Area */
 .product-inputs {
     display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap in smaller screens */
     justify-content: center;
+    gap: 10px; /* Add gap between input elements */
     margin-bottom: 20px;
+    overflow: auto;
 }
 
 .product-input {
-    margin: 0 5px;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 200px;
+    width: 200px; /* Default width for inputs */
+    box-sizing: border-box;
 }
 
+/* Button */
 .add-category-button {
     background-color: #Ffd200;
     color: black;
@@ -50,34 +55,34 @@
     background-color: #ffd0009e;
 }
 
+/* Table container */
+.productmaster-list-container {
+    width: 100%;
+    max-height: 60vh;
+    overflow: auto;
+}
+
 /* Table Styles */
 .product-table {
     width: 100%;
     border-collapse: collapse;
-    text-align: left;
-    display: inline-table;
-    min-width: fit-content;
+    font-size: 1rem;
+    min-width: 600px; /* Min-width for better readability */
 }
 
 .product-table thead {
     background-color: #f9f9f9;
-    min-width: fit-content;
 }
 
 .product-table th, .product-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    min-width: fit-content;
+    padding: 1rem;
+    text-align: left;
+    border: 0.1rem solid #ddd;
 }
 
 .product-table th {
-    font-weight: bold;
-    color: #666;
-}
-
-.product-table td {
-    color: #333;
-    min-width: fit-content;
+    background-color: #f2f2f2;
+    font-size: 1.1rem;
 }
 
 /* Delete Button */
@@ -95,50 +100,83 @@
     background-color: #ffd0009e;
 }
 
-.table-container {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    width: 100%; /* Full width */
-    margin-top: 20px; /* Space above table */
-}
 
-.product-table {
-    width: 100%; /* Full table width to ensure columns take up space */
-    border-collapse: collapse;
-    min-width: fit-content;
-}
 
-.product-table th, .product-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-    min-width: fit-content;
-}
-
-.message {
-    color: green;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-}
-/* Prevent entire page from scrolling horizontally */
+/* Prevent page from scrolling horizontally */
 .product-master-container {
-    overflow-x: hidden; /* Prevent horizontal scroll on the entire page */
+    overflow-x: hidden;
     padding: 20px;
 }
 
 /* Scrollable Table Container */
 .table-container {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    max-width: 100%; /* Container should be responsive */
-    margin-top: 20px; /* Space above the table */
+    overflow-x: auto;
+    max-width: 100%;
+    margin-top: 20px;
     box-sizing: border-box;
 }
 
-/* Style table to be fully responsive */
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    /* Make the inputs take full width on smaller screens */
+    .product-inputs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-input {
+        width: 100%;
+        margin-bottom: 10px; /* Add space between inputs */
+    }
+
+    /* Button takes full width on small screens */
+    .add-category-button {
+        width: 100%;
+    }
+
+    /* Make the table responsive */
+    .product-table {
+        min-width: 100%;
+    }
+
+    .product-table th, .product-table td {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .delete-button {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjust title font size for small screens */
+    .product-master-title {
+        font-size: 20px;
+    }
+
+    /* Button adjusts font size for mobile */
+    .add-category-button {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+
+    /* Modify table font size for smaller devices */
+    .product-table th, .product-table td {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .delete-button {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+}
+
+/* Additional Styles for Table Responsiveness */
 .product-table {
-    width: 100%; /* Table width should fill its container */
-    border-collapse: collapse;
-    min-width: fit-content;
-     /* Set a minimum width to ensure columns don't collapse too much */
+    min-width: 600px; /* Ensure the table is still readable on smaller screens */
 }
 
 .product-table th, .product-table td {
@@ -147,15 +185,3 @@
     border: 1px solid #ddd;
     min-width: fit-content;
 }
-
-/* Additional styling for success message */
-.message {
-    color: green;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-}
-.product-table{
-    min-width: fit-content !important;
-}
-
-

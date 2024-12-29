@@ -5,7 +5,7 @@
   background-color: #fff;
   padding: 2rem 2.5rem;
   box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap; /* Allow wrapping for small screens */
+  position: relative; /* For dropdown positioning */
 }
 
 .navbar-logo img {
@@ -18,14 +18,16 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap; /* Allow menu items to wrap */
+  transition: all 0.3s ease-in-out; 
+  margin-top: 2rem;
 }
 
 .navbar-menu {
   list-style: none;
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap; /* Wrap items for smaller screens */
-  justify-content: center; /* Center items */
+  gap: 1.0rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .navbar-menu li {
@@ -44,12 +46,12 @@
 
 .navbar-menu li a:hover {
   color: #dbae34;
+  text-decoration: none;
 }
 
 .navbar-menu li a.active {
   color: #ffd200;
   font-weight: bold;
-  font-family: 'Playfair Display', serif;
 }
 
 .logout-button {
@@ -59,9 +61,8 @@
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 1.2rem; /* Adjusted font size */
+  font-size: 1.2rem;
   transition: background-color 0.3s;
-  margin-right: 1rem;
 }
 
 .logout-button:hover {
@@ -69,48 +70,188 @@
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 768px) {
+@media  screen and (max-width: 600px)   {
   .navbar {
-    flex-direction: column; /* Stack elements vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
   }
 
+  .navbar-logo {
+    order: 1;
+  }
+
   .navbar-logo img {
-    height: 4rem; /* Adjust logo size for smaller screens */
+    height: 4rem; 
+  }
+
+  .navbar-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: 0 auto; /* Center the toggle button */
+    order: 0;
+  }
+
+  .navbar-toggle:focus {
+    outline: none;
+  }
+
+  .navbar-toggle .bar {
+    display: block;
+    width: 2rem;
+    height: 0.25rem;
+    margin: 0.4rem auto;
+    background-color: black;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-toggle.open .bar:nth-child(1) {
+    transform: rotate(45deg) translate(0.5rem, 0.5rem);
+  }
+
+  .navbar-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(0.5rem, -0.5rem);
   }
 
   .navbar-links {
-    flex-grow: 0;
-    width: 100%; /* Take full width */
-    text-align: center;
+    display: none; 
+    flex-direction: column; /* Stack menu items vertically */
+    width: 100%; /* Full width */
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  .navbar-links.show {
+    display: flex; /* Show dropdown on toggle */
   }
 
   .navbar-menu {
-    flex-direction: column; /* Stack menu items vertically */
-    gap: 1rem; /* Reduce spacing */
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .navbar-menu li a {
-    font-size: 1.2rem; /* Smaller font size */
+    font-size: 1.2rem;
+    text-align: left;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-action {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Take up the full row width */
+    align-items: center;
+    margin-bottom: 1rem; /* Space below */
   }
 
   .logout-button {
-    margin-top: 1rem; /* Add spacing from menu */
-    font-size: 1rem; /* Smaller font size */
+    font-size: 1rem;
+    order:2;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width:600px) and (max-width: 1400px) {
+  .navbar {
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    display: flex;
+    }
+
+    .navbar-toggle {
+      order: 0; /* Move toggle button to the left end */
+      margin-right: auto; /* Ensure it stays on the left */
+      border: none;
+      margin-left: 1rem;
+    }
+  
+    .navbar-logo {
+      order: 1; /* Move logo to the center */
+      margin: 0 auto; /* Center the logo */
+    }
+  
+    .navbar-logo img {
+      height: 4rem; 
+    }
+  
+
+  .navbar-toggle:focus {
+    outline: none;
+  }
+
+  .navbar-toggle .bar {
+    display: block;
+    width: 2rem;
+    height: 0.25rem;
+    margin: 0.4rem auto;
+    background-color: black;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-toggle.open .bar:nth-child(1) {
+    transform: rotate(45deg) translate(0.5rem, 0.5rem);
+  }
+
+  .navbar-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(0.5rem, -0.5rem);
+  }
+
+  .navbar-links {
+    display: none; 
+    flex-direction: column; /* Stack menu items vertically */
+    width: 100%; /* Full width */
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  .navbar-links.show {
+    display: flex; /* Show dropdown on toggle */
+  }
+
   .navbar-menu {
-    gap: 0.5rem; /* Further reduce spacing */
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .navbar-menu li a {
-    font-size: 1rem; /* Further smaller font size */
+    font-size: 1.2rem;
+    text-align: left;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-action {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Take up the full row width */
+    align-items: center;
+    margin-bottom: 1rem; /* Space below */
   }
 
   .logout-button {
-    padding: 0.3rem 0.8rem; /* Adjust padding */
+    margin-left: auto; /* Push to the far right */
+    font-size: 1rem;
+    order : 2; 
   }
 }

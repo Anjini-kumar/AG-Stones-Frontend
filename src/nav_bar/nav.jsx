@@ -1,100 +1,107 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { FaSearch, FaSignOutAlt } from 'react-icons/fa';
+import { FaSignOutAlt } from 'react-icons/fa';
 import './Navbar.css';
 import logo from '../assets/AG-LOGO.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleLogout = async () => {
-    const refresh = localStorage.getItem('refresh');
-    try {
-      await fetch('http://localhost:8000/api/logout/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ refresh }),
-      });
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      localStorage.removeItem('token');
-      localStorage.removeItem('refresh');
-      localStorage.removeItem('user');
-      localStorage.removeItem('user_type')
-      navigate('/');
-    }
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
   };
 
   const userType = localStorage.getItem('user_type');
 
+  // Function to close the menu when a link is clicked
+  const handleMenuItemClick = () => {
+    setMenuOpen(false); // Close the menu
+  };
+
   return (
     <div className="navbar">
-      <div className="navbar-logo" onClick={() => navigate("/dashboard")}>
-        <img src={logo} alt="AG STONES Logo" />
+      <div className="navbar-logo" onClick={() => 
+                {if (data.user_type === "Admin") {
+                  navigate("/dashboard");
+                } else if (data.user_type === "Procurement") {
+                  navigate("/productManagement");
+                } else if (data.user_type === "Warehouse") {
+                  navigate("/warehouse");
+                }}}>
+        <img src={logo} alt="Logo" />
       </div>
-      <div className="navbar-links">
+      <button
+        className={`navbar-toggle ${menuOpen ? 'open' : ''}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+        style={{
+          backgroundColor: 'white',
+        }}
+      >
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </button>
+      <div className={`navbar-links ${menuOpen ? 'show' : ''}`}>
         {userType === 'Warehouse' ? (
           <ul className="navbar-menu">
             <li>
-              <Link to="/warehouse" className={location.pathname === '/warehouse' ? 'active' : ''}>Offers</Link>
+              <Link to="/warehouse" className={location.pathname === '/warehouse' ? 'active' : ''} onClick={handleMenuItemClick}>Offers</Link>
             </li>
             <li>
-              <Link to="/record" className={location.pathname === '/record' ? 'active' :''}> Re Order </Link>
+              <Link to="/record" className={location.pathname === '/record' ? 'active' : ''} onClick={handleMenuItemClick}>Re Order</Link>
             </li>
             <li>
-              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''}>Message</Link>
+              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''} onClick={handleMenuItemClick}>Message</Link>
             </li>
           </ul>
         ) : userType === 'Procurement' ? (
           <ul className="navbar-menu">
             <li>
-              <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''}>ProductManagement</Link>
+              <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''} onClick={handleMenuItemClick}>Product Management</Link>
             </li>
             <li>
-              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''}>ProductMaster</Link>
+              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''} onClick={handleMenuItemClick}>Product Master</Link>
             </li>
             <li>
-              <Link to="/record" className={location.pathname === '/record' ? 'active' :''}> Re Order </Link>
+              <Link to="/record" className={location.pathname === '/record' ? 'active' : ''} onClick={handleMenuItemClick}>Re Order</Link>
             </li>
             <li>
-              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''}>Message</Link>
+              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''} onClick={handleMenuItemClick}>Message</Link>
             </li>
           </ul>
         ) : (
           <ul className="navbar-menu">
             <li>
-              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>Dashboard</Link>
+              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''} onClick={handleMenuItemClick}>Dashboard</Link>
             </li>
             <li>
-              <Link to="/userManagement" className={location.pathname === '/userManagement' ? 'active' : ''}>User  Management</Link>
+              <Link to="/userManagement" className={location.pathname === '/userManagement' ? 'active' : ''} onClick={handleMenuItemClick}>User Management</Link>
             </li>
             <li>
-              <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''}>ProductManagement</Link>
+              <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''} onClick={handleMenuItemClick}>Product Management</Link>
             </li>
             <li>
-              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''}>ProductMaster</Link>
+              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''} onClick={handleMenuItemClick}>Product Master</Link>
             </li>
             <li>
-              <Link to="/warehouse" className={location.pathname === '/warehouse' ? 'active' : ''}>Offers</Link>
+              <Link to="/warehouse" className={location.pathname === '/warehouse' ? 'active' : ''} onClick={handleMenuItemClick}>Offers</Link>
             </li>
             <li>
-              <Link to="/record" className={location.pathname === '/record' ? 'active' :''}> Re Order </Link>
+              <Link to="/record" className={location.pathname === '/record' ? 'active' : ''} onClick={handleMenuItemClick}>Re Order</Link>
             </li>
             <li>
-              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''}>Message</Link>
+              <Link to="/message" className={location.pathname === '/message' ? 'active' : ''} onClick={handleMenuItemClick}>Message</Link>
             </li>
           </ul>
         )}
       </div>
-      <button className="logout-button" onClick={handleLogout} style={{backgroundColor:"#ffd200"}}>
+      <button className="logout-button" onClick={handleLogout} style={{ backgroundColor: "#ffd200" }}>
         <FaSignOutAlt /> Logout
       </button>
-  </div>
+    </div>
   );
 };
 

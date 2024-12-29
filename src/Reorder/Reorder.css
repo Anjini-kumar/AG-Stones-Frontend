@@ -1,22 +1,23 @@
 .container {
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: 85vh;
     background-color: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
     margin: 2rem auto;
-    max-width: 90%; 
+    max-width: 95%;
     width: 100%;
-    overflow: hidden; 
+    overflow: hidden;
+    padding: 1rem;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        background-color: white;
 }
 
 
@@ -31,29 +32,37 @@
     background-color: #218838;
 }
 
-.reorder-table {
+.table-container {
+    width: 100%;
+    max-height: 60vh; 
+    overflow: auto; 
+}
+
+/* Table Styles */
+.product-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    font-size: 1rem;
+    min-width: 800px; 
 }
 
-.reorder-table th, .reorder-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-.reorder-table th {
-    background-color: #f4f4f4;
-}
-
-.reorder-table tr:nth-child(even) {
+.product-table thead {
     background-color: #f9f9f9;
+    min-width: fit-content;
 }
 
-.reorder-table tr:hover {
-    background-color: #f1f1f1;
+.product-table th,
+.product-table td {
+    padding: 1rem;
+    text-align: left;
+    border: 0.1rem solid #ddd;
 }
+
+.product-table th {
+    background-color: #f2f2f2;
+    font-size: 1.1rem;}
+
+
 
 .popup {
     position: fixed;

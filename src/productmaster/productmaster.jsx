@@ -6,6 +6,7 @@ const ProductMaster = () => {
     const [newProduct, setNewProduct] = useState({ name: '', product_category: '', color_design: '' });
     const [message, setMessage] = useState('');
     const user = localStorage.getItem('user')
+    const userType = localStorage.getItem('user_type')
 
     // Fetch products from the backend
     const fetchProducts = async () => {
@@ -62,7 +63,7 @@ const ProductMaster = () => {
             } else {
                 setMessage('Failed to add product');
             }
-            setTimeout(() => setMessage(''), 3000); // Clear message after 3 seconds
+            setTimeout(() => setMessage(''), 1000); // Clear message after 3 seconds
         } else {
             setMessage('Please fill in all fields');
         }
@@ -92,9 +93,16 @@ const ProductMaster = () => {
         <div className="product-master-container">
             <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
                 Welcome to the Product Master <span style={{color:"blue"}}>{user}</span> !!
-            </h1>          
-           {message && <p className="message">{message}</p>}
+            </h1>  
+            {userType === 'Procurement' &&      
             <div className="product-inputs">
+           {message && <p className="message" style={{
+            color:"green",
+            maxHeight:"20px",
+            display:"flex",
+            justifyContent:"center",
+            alignItems:"center"
+           }}>{message}</p>}
             <select
                     name="name"
                     value={newProduct.name}
@@ -123,29 +131,35 @@ const ProductMaster = () => {
                     className="product-input"
                 />
                 <button onClick={addProduct} className="add-category-button">Add Product</button>
-            </div>
-            <table className="product-table">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Color/Design</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map((product) => (
-                        <tr key={product.id}>
-                            <td>{product.name}</td>
-                            <td>{product.product_category}</td>
-                            <td>{product.color_design}</td>
-                            <td>
-                                <button onClick={() => deleteProduct(product.id)} className="delete-button">Delete</button>
-                            </td>
+            </div>}
+            <div className="productmaster-list-container">
+                <table className="product-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Color/Design</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {products.map((product) => (
+                            <tr key={product.id}>
+                                <td>{product.name}</td>
+                                <td>{product.product_category}</td>
+                                <td>{product.color_design}</td>
+                                <td>
+                                    <button onClick={() => deleteProduct(product.id)} className="delete-button"
+                                        style={{
+                                            backgroundColor: '#ffd200',
+                                            color: '#000',
+                                        }}>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
