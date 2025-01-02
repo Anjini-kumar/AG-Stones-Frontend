@@ -102,7 +102,10 @@ const ReorderList = () => {
                     </button>
                 )}
             </div>
-            <div className='table-container'>
+            <div className='table-container'style={{
+                marginTop:"1rem",
+                border:"none"
+            }}>
             <table className="product-table">
                 <thead>
                     <tr>

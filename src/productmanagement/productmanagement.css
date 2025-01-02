@@ -72,29 +72,33 @@
 
 /* Table container styling */
 .table-container {
-    display: inline-table;
-    width: 100% !important;
-    max-height: 60vh; 
-    overflow-x: hidden !important;
-}
-
-.product-table {
+    padding: 1rem;
+    margin-top: 0%;
+  }
+  
+  .table-scrollable {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+  
+  .product-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1rem;
-    min-width: 800px; 
-}
-
-.product-table th,
-.product-table td {
-    padding: 1rem;
+    min-width: 1200px; 
+  }
+  
+  .product-table th,
+  .product-table td {
     text-align: left;
-    border: 0.1rem solid #ddd;
-}
-
-.product-table th {
-    background-color: #f2f2f2;
-    font-size: 1.1rem;}
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+  }
+  
+  .product-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
 
 /* Modal styling */
 .modal {

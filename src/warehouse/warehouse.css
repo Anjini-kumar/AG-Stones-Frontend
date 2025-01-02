@@ -26,36 +26,34 @@
     border: 1px solid #ddd; /* Optional: For a clean boundary */
 }
 
-.product-table {
+/* .table-container {
+    margin: auto;
+    padding: 1rem;
+  } */
+  
+  .table-scrollable {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+  
+  .product-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1rem;
-    min-width: 800px;
-}
-
-.product-table thead {
-    background-color: #f9f9f9;
-    position: sticky;
-    top: 0;
-    z-index: 1; /* Ensures it stays above table rows */
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
-}
-
-.product-table th,
-.product-table td {
-    padding: 1rem;
+    min-width: 1200px; /* Adjust as needed to fit all columns */
+  }
+  
+  .product-table th,
+  .product-table td {
     text-align: left;
-    border: 0.1rem solid #ddd;
-}
-
-.product-table th {
-    background-color: #f2f2f2;
-    font-size: 1.1rem;
-}
-
-.product-table td {
-    color: #333;
-}
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+  }
+  
+  .product-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
 
 
 /* Buttons */
@@ -345,7 +343,6 @@ li {
 
 /* Individual status buttons */
 .status-option {
-    background-color: red !important;
     font-size: 1rem;
     padding: 0.8rem 1.2rem;
     border: none;
@@ -363,7 +360,6 @@ li {
 }
 
 .status-option.selected {
-    background-color: green !important;
     color: #fff;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);

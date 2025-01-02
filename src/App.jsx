@@ -9,6 +9,7 @@ import Productmaster from './productmaster/productmaster';
 import Warehouse from './warehouse/warehouse';
 import Message from './message/message';
 import ReorderList from './Reorder/Reorder';
+import ProductTable from './ConfirmedProducts/ConfirmedProduct'
 import Login from './Login'
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/warehouse" element={<><Navbar /><Warehouse /></>} />
         <Route path="/message" element={<><Navbar /><Message /></>} />
         <Route path="/record" element={<><Navbar /><ReorderList /></>} />
+        <Route path="/approvedproducts" element={<><Navbar /><ProductTable /></>} />
       </Routes>
     </Router>
   );

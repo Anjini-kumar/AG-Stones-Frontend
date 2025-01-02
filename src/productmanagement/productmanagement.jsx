@@ -543,7 +543,10 @@ const resetForm = () => {
                     </div>
                 </div>
             )}
-            <div className="table-container">
+            <div className="table-container" style={{
+                marginTop:"1rem",
+                border:"none"
+            }}>
                 <table className="product-table">
                     <thead>
                         <tr>
@@ -558,7 +561,7 @@ const resetForm = () => {
                             <th>Quantity(sft)</th>
                             <th>Note</th>
                             <th>Offer Date</th>
-                            <th>Status</th>
+                            {/* <th>Status</th> */}
                             <th>Action</th>
                             <th>Price</th>
                             <th>Warehouse</th>
@@ -578,7 +581,7 @@ const resetForm = () => {
                                 <td>{item.quantity}</td>
                                 <td>{item.note}</td>
                                 <td>{item.offer_start}</td>
-                                <td>
+                                {/* <td>
                                     <button
                                         className="status-button"
                                         onClick={() => userType === "Procurement" && handleStatusClick(item)}
@@ -586,7 +589,7 @@ const resetForm = () => {
                                         >
                                         {item.status || 'N/A'}
                                     </button>
-                                    </td>
+                                    </td> */}
                                     <td>
                                     <button
                                         className="action-button"

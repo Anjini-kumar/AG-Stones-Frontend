@@ -51,9 +51,9 @@ const Usermanagement = () => {
     setIsAddUserFormOpen(false);
   };
 
-  const toggleDropdown = (userId) => {
-    setDropdownOpen(dropdownOpen === userId ? null : userId);
-  };
+  // const toggleDropdown = (userId) => {
+  //   setDropdownOpen(dropdownOpen === userId ? null : userId);
+  // };
 
   const handleView = (user) => {
     setViewingUser(user);
@@ -80,6 +80,48 @@ const Usermanagement = () => {
       }
     }
   };  
+
+  const toggleDropdown = (userId) => {
+    const button = document.getElementById(`action-btn-${userId}`);
+    const dropdown = document.getElementById(`dropdown-menu-${userId}`);
+  
+    if (button && dropdown) {
+      const buttonRect = button.getBoundingClientRect();
+      const dropdownRect = dropdown.getBoundingClientRect();
+  
+      // Calculate available space
+      const spaceBelow = window.innerHeight - buttonRect.bottom;
+      const spaceAbove = buttonRect.top;
+      const spaceRight = window.innerWidth - buttonRect.right;
+      const spaceLeft = buttonRect.left;
+  
+      // Position the dropdown
+      if (spaceBelow >= dropdownRect.height) {
+        dropdown.style.top = `${buttonRect.bottom}px`;
+        dropdown.style.bottom = 'auto';
+      } else if (spaceAbove >= dropdownRect.height) {
+        dropdown.style.bottom = `${window.innerHeight - buttonRect.top}px`;
+        dropdown.style.top = 'auto';
+      } else {
+        dropdown.style.top = `${window.innerHeight - dropdownRect.height}px`;
+        dropdown.style.bottom = 'auto';
+      }
+  
+      if (spaceRight >= dropdownRect.width) {
+        dropdown.style.left = `${buttonRect.left}px`;
+        dropdown.style.right = 'auto';
+      } else if (spaceLeft >= dropdownRect.width) {
+        dropdown.style.right = `${window.innerWidth - buttonRect.right}px`;
+        dropdown.style.left = 'auto';
+      } else {
+        dropdown.style.left = `${window.innerWidth - dropdownRect.width}px`;
+        dropdown.style.right = 'auto';
+      }
+    }
+  
+    // Toggle dropdown visibility
+    setDropdownOpen(dropdownOpen === userId ? null : userId);
+  };
 
   const handleSaveUser = async (updatedUser) => {
     try {
@@ -167,21 +209,33 @@ const Usermanagement = () => {
               <td>{user.mobile}</td>
               <td>{user.gender}</td>
               <td>{user.user_type}</td>
-              <td>
-                <button onClick={() => toggleDropdown(user.id)} className="action-btn" style={{
-                  backgroundColor:"white",
-                  color:"#ffd200",
-                }}>
-                  <FaEllipsisV />
-                </button>
-                {dropdownOpen === user.id && (
-                  <div className="dropdown-menu">
-                    <div onClick={() => handleView(user)} className="dropdown-item">View</div>
-                    <div onClick={() => handleEdit(user)} className="dropdown-item">Edit</div>
-                    <div onClick={() => handleDelete(user.id)} className="dropdown-item">Delete</div>
-                  </div>
-                )}
-              </td>
+              <td style={{ position: 'relative' }}>
+  <button
+    id={`action-btn-${user.id}`}
+    onClick={() => toggleDropdown(user.id)}
+    className="action-btn"
+    style={{
+      backgroundColor: "white",
+      color: "#ffd200",
+    }}
+  >
+    <FaEllipsisV />
+  </button>
+  {dropdownOpen === user.id && (
+    <div
+      id={`dropdown-menu-${user.id}`}
+      className="dropdown-menu"
+      style={{
+        position: 'absolute',
+        zIndex: 1000, // Ensure it appears above other elements
+      }}
+    >
+      <div onClick={() => handleView(user)} className="dropdown-item">View</div>
+      <div onClick={() => handleEdit(user)} className="dropdown-item">Edit</div>
+      <div onClick={() => handleDelete(user.id)} className="dropdown-item">Delete</div>
+    </div>
+  )}
+</td>
             </tr>
           ))}
         </tbody>

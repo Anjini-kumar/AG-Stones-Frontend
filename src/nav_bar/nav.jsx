@@ -54,6 +54,9 @@ const Navbar = () => {
               <Link to="/record" className={location.pathname === '/record' ? 'active' : ''} onClick={handleMenuItemClick}>Re Order</Link>
             </li>
             <li>
+            <Link to="/approvedproducts" className={location.pathname === '/approvedproducts' ? 'active' : ''} onClick={handleMenuItemClick}>Confirmed orders</Link>
+            </li>
+            <li>
               <Link to="/message" className={location.pathname === '/message' ? 'active' : ''} onClick={handleMenuItemClick}>Message</Link>
             </li>
           </ul>
@@ -63,7 +66,8 @@ const Navbar = () => {
               <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''} onClick={handleMenuItemClick}>Product Management</Link>
             </li>
             <li>
-              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''} onClick={handleMenuItemClick}>Product Master</Link>
+              {/* <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''} onClick={handleMenuItemClick}>Product Master</Link> */}
+              <Link to="/approvedproducts" className={location.pathname === '/approvedproducts' ? 'active' : ''} onClick={handleMenuItemClick}>Confirmed orders </Link>
             </li>
             <li>
               <Link to="/record" className={location.pathname === '/record' ? 'active' : ''} onClick={handleMenuItemClick}>Re Order</Link>
@@ -80,11 +84,12 @@ const Navbar = () => {
             <li>
               <Link to="/userManagement" className={location.pathname === '/userManagement' ? 'active' : ''} onClick={handleMenuItemClick}>User Management</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/productManagement" className={location.pathname === '/productManagement' ? 'active' : ''} onClick={handleMenuItemClick}>Product Management</Link>
-            </li>
+            </li> */}
             <li>
-              <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''} onClick={handleMenuItemClick}>Product Master</Link>
+              {/* <Link to="/productMaster" className={location.pathname === '/productMaster' ? 'active' : ''} onClick={handleMenuItemClick}>Product Master</Link> */}
+              <Link to="/approvedproducts" className={location.pathname === '/approvedproducts' ? 'active' : ''} onClick={handleMenuItemClick}>Confirmed orders</Link>
             </li>
             <li>
               <Link to="/warehouse" className={location.pathname === '/warehouse' ? 'active' : ''} onClick={handleMenuItemClick}>Offers</Link>

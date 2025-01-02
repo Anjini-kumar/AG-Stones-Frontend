@@ -23,6 +23,7 @@ const Warehouse = () => {
     const [newAction, setNewAction] = useState('');
     const user = localStorage.getItem('user')
     const userType = localStorage.getItem('user_type'); // Assuming user_type is stored in localStorage
+    console.log(userType,"ytgjhb")
 
 
     const STATUS_CHOICES = [
@@ -330,7 +331,11 @@ const Warehouse = () => {
                       }}
                 />
             </div>
-            <div className="table-container">
+            <div className="table-container"
+                style={{
+                    marginTop:"1rem",
+                    border:"none"
+                }}>
                 {/* <h2 style={{marginLeft:"2.2rem" , marginTop:"-6rem"}}>Products List</h2> */}
                 {loading ? (
                     <p>Loading products...</p>
@@ -386,7 +391,7 @@ const Warehouse = () => {
                                     <td>
                                     <button
                                         className="status-button"
-                                        onClick={() => handleStatusClick(product)}
+                                        // onClick={() => handleStatusClick(product)}
                                         >
                                         {product.status || 'N/A'}
                                     </button>
@@ -400,9 +405,9 @@ const Warehouse = () => {
                                                 product.action === "Rejected" ? "red" : 
                                                 "orange"
                                         }}
-                                        onClick={() => handleActionClick(product)}>
+                                        onClick={() => userType === "Warehouse" && handleActionClick(product)}>
                                         {product.action || 'N/A'}
-                                    </button>
+                                    </button>                   
                                     </td>
                                     <td>
                                         <button
@@ -457,9 +462,10 @@ const Warehouse = () => {
                         </div>
 
                         {/* Add Image Button */}
+                        {userType ==="Warehouse" &&
                         <button onClick={handleAddImage} className="add-image-button">
                             Add Image
-                        </button>
+                        </button>}
                         <button onClick={closeImagePopup} >Close</button>
 
                     </div>
@@ -505,6 +511,7 @@ const Warehouse = () => {
                                 action === newAction ? 'selected' : ''
                                 }`}
                                 onClick={() => handleActionChange(action)}
+
                             >
                                 {action}
                             </button>

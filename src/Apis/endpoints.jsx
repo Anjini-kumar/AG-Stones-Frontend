@@ -35,3 +35,16 @@ export const fetchReorders = async () => {
   const response = await apiClient.get("/reorders/");
   return response.data;
   };
+
+
+// Fetch Approved Products
+export const fetchApprovedProducts = async () => {
+  const response = await apiClient.get("/productsapproves/");
+  return response.data;
+};
+
+// Update Product Status and Status Text
+export const updateProductStatus = async (id, data) => {
+  const response = await apiClient.put(`/productsstatus/${id}/`, data);
+  return response.data;
+};
