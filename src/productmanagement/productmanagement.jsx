@@ -341,7 +341,7 @@ const resetForm = () => {
     return (
         <div className="product-management">
             <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
-                Welcome to the Product Management <span style={{color:"blue"}}>{user}</span> !!
+                Welcome to the Product Management <span style={{color:"#ffd200"}}>{user}</span> !!
             </h1> 
              {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
@@ -350,28 +350,35 @@ const resetForm = () => {
                     type="text"
                     placeholder="Search by color"
                     style={{
-                        padding: "0.8rem",
+                        padding: "0.8rem 3rem",
                         width: "50%",
                         maxWidth: "400px",
-                        borderRadius: "25px",
-                        border: "1px solid #ccc",
+                        color: "#000",
+                        fontSize: "16px",
+                        borderRadius: "10px",
+                        border: "1px solid #000",
                         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                        marginRight: "5px",
                       }}                   
                        value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button onClick={handleOpenModal}                     
                 style={{
-                        padding: "0.8rem 1.2rem",
-                        backgroundColor: "#3498db",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: "25px",
-                        cursor: "pointer",
-                        transition: "background-color 0.3s ease",
+                    padding: "0.8rem 3rem",
+                    width: "50%",
+                    backgroundColor: "#ffd200",
+                    fontSize: "16px",
+                    color: "#000",
+                    marginLeft: "5px",
+                    border: "1px solid #000",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                    transition: "background-color 0.3s ease",
                       }}
-                      onMouseOver={(e) => (e.target.style.backgroundColor = "#2980b9")}
-                      onMouseOut={(e) => (e.target.style.backgroundColor = "#3498db")}>
+                      onMouseOver={(e) => (e.target.style.backgroundColor = "#ffd0009e")}
+                      onMouseOut={(e) => (e.target.style.backgroundColor = "#ffd200")}>
                     Add Product
                 </button>
             </div>
@@ -480,7 +487,7 @@ const resetForm = () => {
                             </div>
 
                             <div className="form-group">
-                                <label>Offer</label>
+                                <label>Offer Date</label>
                                 <input
                                 type="datetime-local"
                                 name="offerStart"

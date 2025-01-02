@@ -309,7 +309,7 @@ const Warehouse = () => {
     return (
         <div className="warehouse-container">
             <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
-                Welcome to the Warehouse <span style={{color:"blue"}}>{user}</span> !!
+                Welcome to the Warehouse <span style={{color:"#ffd200"}}>{user}</span> !!
             </h1>  
             <div className="header">
                 <input
@@ -321,16 +321,17 @@ const Warehouse = () => {
                         padding: "0.8rem",
                         width: "50%",
                         maxWidth: "400px",
-                        borderRadius: "25px",
+                        borderRadius: "10px",
+                        fontSize: "16px",
                         border: "1px solid #ccc",
                         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                        marginLeft:"1.5rem"
+                        marginLeft:"1rem"
             
                       }}
                 />
             </div>
             <div className="table-container">
-                <h2 style={{marginLeft:"2.2rem" , marginTop:"-6rem"}}>Products List</h2>
+                {/* <h2 style={{marginLeft:"2.2rem" , marginTop:"-6rem"}}>Products List</h2> */}
                 {loading ? (
                     <p>Loading products...</p>
                 ) : error ? (
@@ -350,7 +351,7 @@ const Warehouse = () => {
                                 <th>Width</th>
                                 <th>QTY<br />(SFT)</th>
                                 <th>Note</th>
-                                <th>Offer </th>
+                                <th>Offer Date </th>
                                 <th>Price/<br />Sft</th>
                                 <th>Img</th>
                                 <th>Status</th>
@@ -424,7 +425,7 @@ const Warehouse = () => {
             {isImagePopupOpen && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                        <h3>Images</h3>
+                        <h3>Image Gallery</h3>
                         <div>
                             <div className="image-gallery">
                                 {selectedImages.length > 0 ? (
@@ -459,7 +460,7 @@ const Warehouse = () => {
                         <button onClick={handleAddImage} className="add-image-button">
                             Add Image
                         </button>
-                        <button onClick={closeImagePopup}>Close</button>
+                        <button onClick={closeImagePopup} >Close</button>
 
                     </div>
                 </div>
@@ -510,7 +511,7 @@ const Warehouse = () => {
                             </li>
                         ))}
                         </ul>
-                        <button onClick={handleSaveAction} style={{backgroundColor:"green"}} >Save</button>
+                        <button onClick={handleSaveAction} style={{backgroundColor:"#ffd200"}} >Save</button>
                         <button onClick={handleActionClosePopup}>Cancel</button>
                     </div>
                     </div>
@@ -528,7 +529,7 @@ const Warehouse = () => {
                             rows="5"
                             className="comment-textarea"
                         ></textarea>
-                        <button className="submit-comment-button" onClick={handleCommentSubmit} style={{backgroundColor:"green"}} >
+                        <button className="submit-comment-button" onClick={handleCommentSubmit} style={{backgroundColor:"#ffd200"}} >
                             Submit
                         </button>
                         <button  onClick={closeCommentPopup}>Cancel</button>

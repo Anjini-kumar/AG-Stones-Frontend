@@ -92,7 +92,7 @@ const ProductMaster = () => {
     return (
         <div className="product-master-container">
             <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
-                Welcome to the Product Master <span style={{color:"blue"}}>{user}</span> !!
+                Welcome to the Product Master <span style={{color:"#ffd200"}}>{user}</span> !!
             </h1>  
             {userType === 'Procurement' &&      
             <div className="product-inputs">

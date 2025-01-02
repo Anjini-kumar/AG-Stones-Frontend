@@ -43,8 +43,8 @@ html {
     border-radius: 0.625rem; /* 10px */
     box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* 10px */
     text-align: center;
-    width: 90%; /* Adjust for responsiveness */
-    max-width: 22.5rem; /* 360px */
+    width: 100%; /* Adjust for responsiveness */
+    max-width: 33.5rem; /* 360px */
     height: auto;
   }
   
@@ -110,6 +110,7 @@ html {
     padding: 0.5rem 0; /* 15px */
     background-color: rgb(245, 204, 25);
     width: 60%;
+    cursor: pointer;
     max-width: 16.25rem; /* 260px */
     text-align: center;
     margin: auto;

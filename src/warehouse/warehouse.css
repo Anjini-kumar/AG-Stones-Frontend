@@ -19,21 +19,6 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }
 
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column; /* Stack items for smaller screens */
-        align-items: stretch; /* Make children take full width */
-        padding: 10px;
-    }
-
-    .filter {
-        margin-bottom: 10px; /* Add spacing between filter and other elements */
-    }
-
-    .search-input {
-        width: 100%; /* Expand to full width on smaller screens */
-    }
-}
 .table-container {
     width: 100%;
     max-height: 60vh;
@@ -75,8 +60,8 @@
 
 /* Buttons */
 .gallery-button, .status-button, .comment-button {
-    background-color: #FFD700;
-    color: #fff;
+    background-color: #ffd200 !important;
+    color: #000;
     border: none;
     padding: 5px 10px;
     font-weight: bold;
@@ -93,7 +78,7 @@
 }
 
 .gallery-button:hover, .status-button:hover, .comment-button:hover {
-    background-color: #e6be00;
+    background-color: #ffd0009e;
 }
 
 
@@ -168,8 +153,7 @@
 
 .submit-comment-button {
     margin-top: 10px;
-    background-color: #4CAF50;
-    color: white;
+    color: #000 !important;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -178,7 +162,7 @@
 }
 
 .submit-comment-button:hover {
-    background-color: #45a049;
+    background-color: #ffd0009e;
 }
 
 .popup-overlay {
@@ -288,8 +272,8 @@
 }
 
 .add-image-button {
-    background-color: #007bff;
-    color: white;
+    background-color: #ffd200 !important;
+    color: #000 !important;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -299,12 +283,12 @@
 }
 
 .add-image-button:hover {
-    background-color: #0056b3;
+    background-color: #ffd0009e;
 }
 
 /* status */
 .status-button {
-    background-color: #007bff;
+    background-color: #ffd200 !important;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -361,6 +345,7 @@ li {
 
 /* Individual status buttons */
 .status-option {
+    background-color: red !important;
     font-size: 1rem;
     padding: 0.8rem 1.2rem;
     border: none;
@@ -373,15 +358,18 @@ li {
 }
 
 .status-option:hover {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #ffd0009e !important;
+    color: #000 !important;
 }
 
 .status-option.selected {
-    background-color: #007bff;
+    background-color: green !important;
     color: #fff;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+}
+.status-option.selected:hover{
+    background-color: #ffd0009e !important;
 }
 
 /* Save and Cancel buttons */
@@ -393,10 +381,12 @@ li {
     margin: 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    
 }
 
 .popup-content button:hover {
     transform: translateY(-2px);
+
 }
 
 .popup-content button:active {
@@ -423,6 +413,20 @@ button:nth-of-type(2):hover {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Stack items for smaller screens */
+        align-items: stretch; /* Make children take full width */
+        padding: 10px;
+    }
+
+    .filter {
+        margin-bottom: 10px; /* Add spacing between filter and other elements */
+    }
+
+    .search-input {
+        width: 100%; /* Expand to full width on smaller screens */
+    }
+
     .popup-content {
         padding: 1.5rem;
     }

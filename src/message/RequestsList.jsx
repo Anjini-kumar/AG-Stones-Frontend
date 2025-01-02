@@ -58,7 +58,7 @@ const RequestsList = () => {
   return (
     <div style={{  fontFamily: "Arial, sans-serif" }}>
       <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
-        Welcome to the Requests <span style={{color:"blue"}}>{user}</span> !!
+        Welcome to the Requests <span style={{color:"#ffd200"}}>{user}</span> !!
       </h1>
 
       {/* Filter Section */}
@@ -72,27 +72,29 @@ const RequestsList = () => {
             padding: "0.8rem",
             width: "50%",
             maxWidth: "400px",
-            borderRadius: "25px",
+            borderRadius: "10px",
+            fontSize: "16px",
             border: "1px solid #ccc",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            marginLeft:"1.5rem"
+            marginLeft:"1rem"
 
           }}
         />
         {userType === 'Warehouse' && <button
           style={{
             padding: "0.8rem 1.2rem",
-            backgroundColor: "#3498db",
-            color: "#fff",
-            border: "none",
-            borderRadius: "25px",
+            backgroundColor: "#ffd200",
+            color: "#000",
+            border: "1px solid #000",
+            borderRadius: "10px",
+            fontSize:"16px",
             cursor: "pointer",
             transition: "background-color 0.3s ease",
             marginRight:"1.5rem"
 
           }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#2980b9")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#3498db")}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#ffd0009e")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#ffd200")}
           onClick={togglePopup}
         >
           Add Request

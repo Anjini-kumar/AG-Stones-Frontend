@@ -12,7 +12,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
- const RECAPTCHA_SITE_KEY = ""; 
+ const RECAPTCHA_SITE_KEY = "6LfYXqkqAAAAAMZ15DAXg87lnHrNG_OTeakXqHUU"; 
 
 
   const handleRecaptchaChange = (token) => {
@@ -54,7 +54,8 @@ const Login = () => {
           navigate("/productManagement");
         } else if (data.user_type === "Warehouse") {
           navigate("/warehouse");
-        }
+        } else 
+          navigate("/dashboard");
 
         window.location.reload();
       } else {

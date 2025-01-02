@@ -115,11 +115,12 @@ const Usermanagement = () => {
           type="text" 
           placeholder="Search by User Name..." 
           style={{
-            padding: "0.8rem",
-            width: "50%",
+            padding: "0.8rem 3rem",
             maxWidth: "400px",
-            borderRadius: "25px",
-            border: "1px solid #ccc",
+            borderRadius: "10px",
+            fontSize: "16px",
+            marginLeft: "5px",
+            border: "1px solid #000",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           }}  
           value={searchTerm}
@@ -127,16 +128,19 @@ const Usermanagement = () => {
         />
         <button onClick={toggleAddUserForm} 
         style={{
-            padding: "0.8rem 1.2rem",
-            backgroundColor: "#3498db",
-            color: "#fff",
-            border: "none",
-            borderRadius: "25px",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease",
+          padding: "0.8rem 3rem",
+          backgroundColor: "#ffd200",
+          fontSize: "16px",
+          marginLeft: "5px",
+          color: "#000",
+          border: "1px solid #000",
+          borderRadius: "10px",
+          cursor: "pointer",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          transition: "background-color 0.3s ease",
           }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#2980b9")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#3498db")}>
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#ffd0009e")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#ffd200")}>
             Add User
         </button>
       </div>
@@ -166,7 +170,7 @@ const Usermanagement = () => {
               <td>
                 <button onClick={() => toggleDropdown(user.id)} className="action-btn" style={{
                   backgroundColor:"white",
-                  color:"#3498db",
+                  color:"#ffd200",
                 }}>
                   <FaEllipsisV />
                 </button>

@@ -1,3 +1,6 @@
+*{
+    font-family: 'Playfair Display', serif;
+  }
 .product-management {
     display: flex;
     flex-direction: column;
@@ -69,9 +72,10 @@
 
 /* Table container styling */
 .table-container {
-    width: 100%;
+    display: inline-table;
+    width: 100% !important;
     max-height: 60vh; 
-    overflow: auto; 
+    overflow-x: hidden !important;
 }
 
 .product-table {
@@ -163,20 +167,21 @@
     height: 40px; /* Adjust the height of each option */
 }
 .submit-btn {
-    background-color: #ffd200;
+    background-color: #ffd200 !important;
     align-items: center;
-    color: black;
+    color: black !important;
     font-weight: bold;
-    width: 100%;
+    width: 40%;
     padding: 10px 15px;
     font-size: 16px;
-    border: none;
-    border-radius: 4px;
+    border-radius: 10px;
+    border: "1px solid #000";
     cursor: pointer;
+    margin-left: 30%;
 }
 
 .submit-btn:hover {
-    background-color: #ffd0009e;
+    background-color: #ffd0009e !important;
 }
 
 /* Pagination styling */
@@ -193,14 +198,15 @@
     font-size: 16px;
     color: #ffd200;
     background: none;
-    background-color: #ffffff;
+    background-color: #ffd200;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .pagination button:disabled {
-    color: #ccc;
-    border-color: #ccc;
+    color: #fff;
+    background-color: #ffd200;
+    border-color: #000;
     cursor: not-allowed;
 }
 
