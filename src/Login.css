@@ -44,14 +44,14 @@ html {
     box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* 10px */
     text-align: center;
     width: 100%; /* Adjust for responsiveness */
-    max-width: 33.5rem; /* 360px */
-    height: auto;
+    max-width: 30rem; /* 360px */
+    height: 530px;
   }
   
   .logo {
     width: 7.5rem; /* 120px */
     height: auto;
-    margin-bottom: 1.25rem; /* 20px */
+    margin-bottom: 40px; /* 20px */
   }
   
 
@@ -79,7 +79,7 @@ html {
     margin: 0.625rem 0; /* 10px */
     border: 1px solid #ccc;
     border-radius: 0.3125rem; /* 5px */
-    height: 2rem;
+    height: 3rem;
     border-bottom: 2px solid rgb(245, 204, 25);
     border-right: 2px solid rgb(245, 204, 25);
     outline: none;
@@ -99,22 +99,23 @@ html {
   }
   
   .captcha {
+    margin-top: 30px;
     transform: translateY(-1rem);
   }
   
   .login-button {
     font-size: 1.875rem; /* 30px */
     font-weight: 500;
-    color: black;
     margin: 0;
     padding: 0.5rem 0; /* 15px */
     background-color: rgb(245, 204, 25);
     width: 60%;
     cursor: pointer;
-    max-width: 16.25rem; /* 260px */
+    max-width: 12rem; /* 260px */
     text-align: center;
     margin: auto;
     border-radius: 0.625rem; /* 10px */
+    border-color: #ccc;
     transform: translateY(-1.5rem);
   }
   
