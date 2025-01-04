@@ -4,7 +4,7 @@
 .product-management {
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    height: 80vh;
     background-color: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);

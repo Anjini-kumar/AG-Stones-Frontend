@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  padding: 2rem 2.5rem;
+  padding: 1rem;
   box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
   position: relative; /* For dropdown positioning */
 }
