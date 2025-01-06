@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "./assets/AG-LOGO.png";
-// import { RECAPTCHA_SITE_KEY } from "./config"; // Import the key
+import API_BASE_URL from "./Apis/endpoints"; 
+import { RECAPTCHA_SITE_KEY } from "./Apis/endpoints"; 
 import "./Login.css";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -11,8 +12,6 @@ const Login = () => {
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
- const RECAPTCHA_SITE_KEY = "6LfYXqkqAAAAAMZ15DAXg87lnHrNG_OTeakXqHUU"; 
 
 
   const handleRecaptchaChange = (token) => {
@@ -28,7 +27,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/login/", {
+      const response = await fetch(`${API_BASE_URL}/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

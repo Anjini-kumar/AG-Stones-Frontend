@@ -8,7 +8,7 @@ const ViewUserModal = ({ user, onClose }) => {
   return (
     <div className="view-user-modal">
       <div className="modal-content">
-        <button onClick={onClose} className="close-btn">×</button>
+        <button onClick={onClose} className="close-btn" style={{backgroundColor:"#fff", color:"#000"}}>×</button>
         <h2>User Details</h2>
         <div className="user-info">
           <p><strong>ID:</strong> {user.id}</p>

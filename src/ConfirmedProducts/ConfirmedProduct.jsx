@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchApprovedProducts, updateProductStatus } from "../Apis/endpoints";
+import { fetchApprovedProducts, updateProductStatus,loadProductImages,addProductImages } from "../Apis/endpoints";
 import "./cnfprod.css";
 import axios from 'axios';
 
@@ -10,7 +10,8 @@ const ProductTable = () => {
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loadingImages, setLoadingImages] = useState(false);
-  
+  const [error, setError] = useState(null);
+
   const [newStatus, setNewStatus] = useState("");
   const [statusText, setStatusText] = useState("");
   const [selectedImages, setSelectedImages] = useState([]);
@@ -26,18 +27,61 @@ const ProductTable = () => {
 
   
   const fetchProductImages = async (productId) => {
+    setLoadingImages(true); // Start loading
     try {
-        setLoadingImages(true);
-        const response = await axios.get(`http://localhost:8000/api/products/${productId}/images/`);
-        setSelectedImages(response.data);
-        console.log(response.data,"dswd")
+      const images = await loadProductImages(productId); // Call the centralized API function
+      setSelectedImages(images || []); // Set fetched images
+      setError(null); // Clear previous errors
+      console.log(images, "Fetched images");
     } catch (error) {
-        console.error('Error fetching images:', error);
-        setSelectedImages([]);
+      console.error('Error fetching images:', error);
+      setSelectedImages([]); // Clear images if there’s an error
+      setError(error.message); // Set error for display
     } finally {
-        setLoadingImages(false);
+      setLoadingImages(false); // End loading
     }
-};
+  };
+  
+
+  
+      const handleAddImage = () => {
+          const imageInput = document.createElement('input');
+          imageInput.type = 'file';
+          imageInput.accept = 'image/*';
+          imageInput.multiple = true;
+  
+          imageInput.onchange = (event) => {
+              const files = Array.from(event.target.files);
+              const newImages = files.map(file => URL.createObjectURL(file));
+  
+              // Update the selected images
+              setSelectedImages((prevImages) => [...prevImages, ...newImages]);
+  
+              // Optionally, upload the images to the server here
+              uploadImages(files);
+          };
+  
+          imageInput.click();
+      };
+  
+     
+      // Upload product images
+      const uploadImages = async (files) => {
+          if (!selectedProduct) return;
+        
+          try {
+            const data = await addProductImages(selectedProduct.id, files); // Use the centralized API function
+        
+            console.log('Images uploaded successfully:', data);
+        
+            // Refresh the page
+            window.location.reload(); // Refresh the current page
+          } catch (err) {
+            console.error('Error uploading images:', err);
+          }
+        };
+        
+        
 
 const [expandedImage, setExpandedImage] = useState(null);
 
@@ -266,6 +310,11 @@ const closeImagePopup = () => {
                             )}
                         </div>
 
+                        {/* Add Image Button */}
+                        {userType ==="Procurement" &&
+                        <button onClick={handleAddImage} className="add-image-button">
+                            Add Image
+                        </button>}
                         <button onClick={closeImagePopup} >Close</button>
 
                     </div>

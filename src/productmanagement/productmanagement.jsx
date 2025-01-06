@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './productmanagement.css';
+import {fetchProductsData , addProductData } from './../Apis/endpoints'
+
 
 // const productTypeOptions = ["Natural", "Engineered"];
 const warehouseOptions = ["All","Cincinnati", "Raleigh", "Dallas", "Austin"]; 
@@ -69,37 +71,17 @@ const user = localStorage.getItem('user')
 
     const fetchProducts = async () => {
         try {
-            const token = localStorage.getItem('token');
-            if (!token) { 
-                // If token is not found, 
-                // redirect to login page 
-                window.location.href = '/';
-                return; 
-            }
-            const response = await fetch('http://localhost:8000/api/product/', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-            if (response.status === 401) { 
-                // If token is expired or invalid, redirect to login page 
-                window.location.href = '/'; 
-              return;
-              }
-            if (!response.ok) {
-                throw new Error('Failed to fetch products');
-            }
-    
-            const data = await response.json();
+          const data = await fetchProductsData(); // Call the centralized fetchProductsData function
+          if (data) {
             console.log(data);
-            setProducts(data);
-            setData(data);  
+            setProducts(data); // Set fetched products
+            setData(data); // Set data
+          }
         } catch (error) {
-            console.error('Error fetching products:', error);
+          console.error('Error fetching products:', error); // Handle errors from the API
         }
-    };
+      };
+      
 
 
 
@@ -125,69 +107,57 @@ const user = localStorage.getItem('user')
         });
     };
 
-              // Handle Input Change
-              const handleInputChange = (e) => {
-                const { name, value } = e.target;
-                setNewProduct({ ...newProduct, [name]: value });
-              };
-
-
-              const handleAddProduct = async (e) => {
-                e.preventDefault();
-              
-                // Create a FormData object to handle file uploads along with other data
-                const formData = new FormData();
-              
-                // Append all form data fields to FormData
-                formData.append("block_no", newProduct.blockNo);
-                formData.append("bundles", newProduct.bundles);
-                // formData.append("uom", newProduct.uom);
-                formData.append("thickness", parseFloat(newProduct.thickness));
-                // formData.append("dimension", newProduct.dimension);
-                formData.append("length", parseFloat(newProduct.length));
-                formData.append("width", parseFloat(newProduct.width));
-                formData.append("quantity", parseInt(newProduct.quantity));
-                formData.append("note", newProduct.note);
-                formData.append("offer_start", new Date(newProduct.offerStart).toISOString());
-                formData.append("price", parseFloat(newProduct.price));
-                formData.append("warehouse", newProduct.warehouse);
-                formData.append("color_design", newProduct.color_design);
-                formData.append("category", category);
-                // formData.append("product_type", productType);
-              
-                // Append each image to FormData
-                images.forEach((image) => {
-                  formData.append("images", image);
-                });
-              
-                try {
-                  const token = localStorage.getItem("token");
-                  if (!token) throw new Error("Authentication token not found");
-              
-                  // Make the POST request with FormData
-                  const response = await axios.post(
-                    "http://localhost:8000/api/product/create/",
-                    formData,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "multipart/form-data", // Important for file uploads
-                      },
+                // Handle Input Change
+                const handleInputChange = (e) => {
+                    const { name, value } = e.target;
+                    setNewProduct({ ...newProduct, [name]: value });
+                  };
+    
+    
+                  const handleAddProduct = async (e) => {
+                    e.preventDefault();
+                  
+                    // Create a FormData object to handle file uploads along with other data
+                    const formData = new FormData();
+                  
+                    // Append all form data fields to FormData
+                    formData.append('block_no', newProduct.blockNo);
+                    formData.append('bundles', newProduct.bundles);
+                    formData.append('thickness', parseFloat(newProduct.thickness));
+                    formData.append('length', parseFloat(newProduct.length));
+                    formData.append('width', parseFloat(newProduct.width));
+                    formData.append('quantity', parseInt(newProduct.quantity));
+                    formData.append('note', newProduct.note);
+                    formData.append('offer_start', new Date(newProduct.offerStart).toISOString());
+                    formData.append('price', parseFloat(newProduct.price));
+                    formData.append('warehouse', newProduct.warehouse);
+                    formData.append('color_design', newProduct.color_design);
+                    formData.append('category', category);
+                  
+                    // Append each image to FormData
+                    images.forEach((image) => {
+                      formData.append('images', image);
+                    });
+                  
+                    try {
+                      const token = localStorage.getItem('token');
+                      if (!token) throw new Error('Authentication token not found');
+                  
+                      // Call the centralized addProductData function
+                      const response = await addProductData(formData, token);
+                  
+                      // Handle success
+                      setSuccessMessage('Product added successfully!');
+                      setErrorMessage('');
+                      setNewProduct({}); // Reset form data
+                      resetForm(); // Call your reset form function if defined
+                      handleCloseModal();
+                    } catch (error) {
+                      console.error('Error adding product:', error);
+                      setErrorMessage('Failed to add product. Please check your input.');
+                      setSuccessMessage('');
                     }
-                  );
-              
-                  // Handle success
-                  setSuccessMessage("Product added successfully!");
-                  setErrorMessage("");
-                  setNewProduct({}); // Reset form data
-                  resetForm(); // Call your reset form function if defined
-                  handleCloseModal();
-                } catch (error) {
-                  console.error("Error adding product:", error);
-                  setErrorMessage("Failed to add product. Please check your input.");
-                  setSuccessMessage("");
-                }
-              };
+                  };
               
 
 const resetForm = () => {
@@ -242,6 +212,7 @@ const resetForm = () => {
     };
 
 
+    
 
 
      //Action
@@ -260,7 +231,7 @@ const resetForm = () => {
         try {
            const token = localStorage.getItem('token');
 
-          await fetch(`http://localhost:8000/api/products/${selectedProduct.id}/action/`, {
+          await fetch(`https://crm.agstones.com/api/products/${selectedProduct.id}/action/`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -299,7 +270,7 @@ const resetForm = () => {
         try {
            const token = localStorage.getItem('token');
 
-          await fetch(`http://localhost:8000/api/products/${selectedProduct.id}/status/`, {
+          await fetch(`https://crm.agstones.com/api/products/${selectedProduct.id}/status/`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,

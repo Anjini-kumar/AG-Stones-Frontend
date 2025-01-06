@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './AddUserForm.css';
+import { createUser  } from "./../Apis/endpoints";
+
 
 const AddUserForm = ({ onAddUser }) => {
   const [userData, setUserData] = useState({
@@ -26,29 +28,19 @@ const AddUserForm = ({ onAddUser }) => {
     } else {
       setError('');
       try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/create-user/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            username: userData.name,
-            email: userData.email,
-            user_type: userData.userType,
-            mobile: userData.mobile,
-            gender: userData.gender,
-            password: userData.password,
-          })
-        });
-        if (response.ok) {
-          onAddUser(await response.json());
-        } else {
-          setError('Failed to add user');
-        }
+        const userPayload = {
+          username: userData.name,
+          email: userData.email,
+          user_type: userData.userType,
+          mobile: userData.mobile,
+          gender: userData.gender,
+          password: userData.password,
+        };
+  
+        const newUser = await createUser(userPayload); // Call the centralized createUser function
+        onAddUser(newUser); // Add the new user to the list
       } catch (error) {
-        setError('Error: ' + error.message);
+        setError('Error: ' + error.message); // Handle errors from the API
       }
     }
   };
@@ -89,7 +81,7 @@ const AddUserForm = ({ onAddUser }) => {
 
         {error && <p className="error">{error}</p>}
 
-        <button type="submit" className="add-user-button">Add User</button>
+        <button type="submit" className="add-user-button" style={{backgroundColor:"#ffd200"}}>Add User</button>
       </form>
     </div>
   );

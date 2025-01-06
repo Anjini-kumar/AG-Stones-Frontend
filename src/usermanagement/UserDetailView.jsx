@@ -14,7 +14,7 @@ const UserDetailView = ({ user, onClose }) => {
       <p><strong>Mobile:</strong> {user.mobile}</p>
       <p><strong>Gender:</strong> {user.gender}</p>
       <p><strong>Role:</strong> {user.role}</p>
-      <button onClick={onClose} className="close-btn">Close</button>
+      <button onClick={onClose} className="close-btn" style={{backgroundColor:"#ffd200"}}>Close</button>
     </div>
   );
 };

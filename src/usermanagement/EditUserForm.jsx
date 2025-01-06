@@ -45,7 +45,7 @@ const EditUserForm = ({ user, onSave, onCancel }) => {
         </select>
 
         <div className="form-buttons">
-          <button type="submit" className="save-button">Save</button>
+          <button type="submit" className="save-button" style={{backgroundColor:"#ffd200"}}>Save</button>
           <button type="button" onClick={onCancel} className="cancel-button">Cancel</button>
         </div>
       </form>

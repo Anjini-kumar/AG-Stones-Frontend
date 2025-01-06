@@ -44,8 +44,8 @@ html {
     box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* 10px */
     text-align: center;
     width: 100%; /* Adjust for responsiveness */
-    max-width: 30rem; /* 360px */
-    height: 530px;
+    max-width: 25rem; /* 360px */
+    height: 500px;
   }
   
   .logo {
@@ -95,7 +95,7 @@ html {
   }
   
   input[type="checkbox"] {
-    margin-right: 0.625rem; /* 10px */
+    margin-right: 10px; /* 10px */
   }
   
   .captcha {

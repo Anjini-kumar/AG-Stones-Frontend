@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './warehouse.css';
 import axios from 'axios';
+import { fetchProducts ,loadProductImages,updateProductComment ,addProductImages,updateProductAction} from "./../Apis/endpoints";
+
 
 
 
@@ -39,59 +41,37 @@ const Warehouse = () => {
 
     // Fetch products from the backend
     useEffect(() => {
-        const fetchProducts = async () => {
-            setLoading(true); // Start loading
-            try {
-                const token = localStorage.getItem('token');
-                if (!token) { 
-                    // If token is not found, 
-                    // redirect to login page 
-                    window.location.href = '/';
-                    return; 
-                }
-                const response = await fetch('http://localhost:8000/api/products/', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                });
-                if (response.status === 401) { 
-                    // If token is expired or invalid, redirect to login page 
-                    window.location.href = '/'; 
-                return;
-                }
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch products');
-                }
-
-                const data = await response.json();
-                setProducts(data);
-                setError(null); 
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false); 
-            }
+        const loadProducts = async () => {
+          setLoading(true); // Start loading
+          try {
+            const data = await fetchProducts(); // Call the centralized fetchProducts function
+            setProducts(data || []); // Set fetched data
+            setError(null); // Clear any previous errors
+          } catch (err) {
+            setError(err.message); // Handle errors
+          } finally {
+            setLoading(false); // End loading
+          }
         };
 
-        fetchProducts();
+        loadProducts(); // Call the function to load products
     }, []);
 
     const fetchProductImages = async (productId) => {
+        setLoadingImages(true); // Start loading
         try {
-            setLoadingImages(true);
-            const response = await axios.get(`http://localhost:8000/api/products/${productId}/images/`);
-            setSelectedImages(response.data);
-            console.log(response.data,"dswd")
-        } catch (error) {
-            console.error('Error fetching images:', error);
-            setSelectedImages([]);
+          const images = await loadProductImages(productId); // Call the centralized API function
+          setSelectedImages(images || []); // Set fetched images
+          setError(null); // Clear previous errors
+          console.log(images, "Fetched images");
+        } catch (err) {
+          console.error("Error fetching images:", err);
+          setSelectedImages([]); // Clear images if there’s an error
+          setError(err.message); // Set error for display
         } finally {
-            setLoadingImages(false);
+          setLoadingImages(false); // End loading
         }
-    };
+      };
 
     const [expandedImage, setExpandedImage] = useState(null);
 
@@ -139,88 +119,60 @@ const Warehouse = () => {
 
     const handleCommentSubmit = async () => {
         try {
-            const token = localStorage.getItem('token');
-
-            const response = await fetch(`http://localhost:8000/api/product/${selectedProduct.id}/comment/`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ comment: newComment }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to update comment');
-            }
-
-            const updatedProduct = await response.json();
-
-            // Update the product list with the new comment
-            setProducts((prevProducts) =>
-                prevProducts.map((product) =>
-                    product.id === updatedProduct.id ? { ...product, comment: updatedProduct.comment } : product
-                )
-            );
-
-            closeCommentPopup();
+          const updatedProduct = await updateProductComment(selectedProduct.id, newComment); // Use the centralized API function
+      
+          // Update the product list with the new comment
+          setProducts((prevProducts) =>
+            prevProducts.map((product) =>
+              product.id === updatedProduct.id ? { ...product, comment: updatedProduct.comment } : product
+            )
+          );
+      
+          closeCommentPopup(); // Close the comment popup
         } catch (err) {
-            console.error('Error updating comment:', err);
+          console.error('Error updating comment:', err);
         }
-    };
+      };
+      
 
-    const handleAddImage = () => {
-        const imageInput = document.createElement('input');
-        imageInput.type = 'file';
-        imageInput.accept = 'image/*';
-        imageInput.multiple = true;
+    // const handleAddImage = () => {
+    //     const imageInput = document.createElement('input');
+    //     imageInput.type = 'file';
+    //     imageInput.accept = 'image/*';
+    //     imageInput.multiple = true;
 
-        imageInput.onchange = (event) => {
-            const files = Array.from(event.target.files);
-            const newImages = files.map(file => URL.createObjectURL(file));
+    //     imageInput.onchange = (event) => {
+    //         const files = Array.from(event.target.files);
+    //         const newImages = files.map(file => URL.createObjectURL(file));
 
-            // Update the selected images
-            setSelectedImages((prevImages) => [...prevImages, ...newImages]);
+    //         // Update the selected images
+    //         setSelectedImages((prevImages) => [...prevImages, ...newImages]);
 
-            // Optionally, upload the images to the server here
-            uploadImages(files);
-        };
+    //         // Optionally, upload the images to the server here
+    //         uploadImages(files);
+    //     };
 
-        imageInput.click();
-    };
+    //     imageInput.click();
+    // };
 
-    const uploadImages = async (files) => {
-        if (!selectedProduct) return;
-
-        const formData = new FormData();
-        files.forEach((file) => {
-            formData.append('images', file);
-        });
-
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:8000/api/product/${selectedProduct.id}/add-images/`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to upload images');
-            }
-
-            const data = await response.json();
-            console.log('Images uploaded successfully:', data);
-
-            // Refresh the page
-            window.location.reload(); // Refresh the current page
-            
-        } catch (err) {
-            console.error('Error uploading images:', err);
-        }
-    };
+   
+    // // Upload product images
+    // const uploadImages = async (files) => {
+    //     if (!selectedProduct) return;
+      
+    //     try {
+    //       const data = await addProductImages(selectedProduct.id, files); // Use the centralized API function
+      
+    //       console.log('Images uploaded successfully:', data);
+      
+    //       // Refresh the page
+    //       window.location.reload(); // Refresh the current page
+    //     } catch (err) {
+    //       console.error('Error uploading images:', err);
+    //     }
+    //   };
+      
+      
 
     //Action
     const handleActionClick = (product) => {
@@ -235,24 +187,18 @@ const Warehouse = () => {
     };
 
     const handleSaveAction = async () => {
+        if (!selectedProduct) return;
+      
         try {
-           const token = localStorage.getItem('token');
-
-          await fetch(`http://localhost:8000/api/products/${selectedProduct.id}/action/`, {
-            method: 'PATCH',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ action: newAction }),
-          });
+          await updateProductAction(selectedProduct.id, newAction); // Use the centralized API function
           console.log(`Updated status for ${selectedProduct.name}: ${newAction}`);
-          setIsActionPopupOpen(false);
-          window.location.reload();
+          setIsActionPopupOpen(false); // Close the action popup
+          window.location.reload(); // Refresh the page
         } catch (error) {
-          console.error('Failed to update Action', error);
+          console.error('Failed to update Action:', error);
         }
       };
+      
       
       const handleActionClosePopup = () => {
         setIsActionPopupOpen(false);
@@ -277,7 +223,7 @@ const Warehouse = () => {
         try {
            const token = localStorage.getItem('token');
 
-          await fetch(`http://localhost:8000/api/products/${selectedProduct.id}/status/`, {
+          await fetch(`https://crm.agstones.com/api/products/${selectedProduct.id}/status/`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -462,10 +408,10 @@ const Warehouse = () => {
                         </div>
 
                         {/* Add Image Button */}
-                        {userType ==="Warehouse" &&
+                        {/* {userType ==="Warehouse" &&
                         <button onClick={handleAddImage} className="add-image-button">
                             Add Image
-                        </button>}
+                        </button>} */}
                         <button onClick={closeImagePopup} >Close</button>
 
                     </div>

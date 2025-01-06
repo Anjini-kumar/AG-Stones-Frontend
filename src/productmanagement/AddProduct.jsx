@@ -90,7 +90,7 @@ const  AddProduct = () =>{
               
                   // Make the POST request with FormData
                   const response = await axios.post(
-                    "http://localhost:8000/api/product/create/",
+                    "https://crm.agstones.com/api/product/create/",
                     formData,
                     {
                       headers: {
