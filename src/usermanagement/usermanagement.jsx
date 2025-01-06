@@ -163,7 +163,7 @@ const Usermanagement = () => {
             Add User
         </button>
       </div>
-      <div class="user-table-container">
+      <div className="user-table-container">
 
       <table className="user-table">
         <thead>

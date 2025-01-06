@@ -212,7 +212,7 @@ const resetForm = () => {
     };
 
 
-    
+
 
 
      //Action
@@ -487,12 +487,12 @@ const resetForm = () => {
                                 value={newProduct.warehouse}
                                 onChange={handleInputChange}
                                 className="select-option"
-                                >
-                                {warehouseOptions.map((option) => (
-                                    <option key={option} value={option}>
-                                    {option}
-                                    </option>
-                                ))}
+                                >   <option value="">Select Warehouse</option>
+                                    <option value="All">All</option>
+                                    <option value="Cincinnati">Cincinnati</option>
+                                    <option value="Raleigh">Raleigh</option>
+                                    <option value="Dallas">Dallas</option>
+                                    <option value="Austin">Austin</option>
                                 </select>
                             </div>
                             <div className="form-group">

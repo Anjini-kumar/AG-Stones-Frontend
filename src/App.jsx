@@ -14,24 +14,30 @@ import Login from './Login'
 
 
 
+
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/Home/*" element={<Navbar />} />
-        <Route path="/dashboard" element={<><Navbar /><Dashboard /></>} />
-        <Route path="/userManagement" element={<><Navbar /><Usermanagement /></>} />
-        <Route path="/productManagement" element={<><Navbar /><Productmanagement /></>} />
-        <Route path="/productMaster" element={<><Navbar /><Productmaster /></>} />
-        <Route path="/warehouse" element={<><Navbar /><Warehouse /></>} />
-        <Route path="/message" element={<><Navbar /><Message /></>} />
-        <Route path="/record" element={<><Navbar /><ReorderList /></>} />
-        <Route path="/approvedproducts" element={<><Navbar /><ProductTable /></>} />
-      </Routes>
+      <div className="layout">
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/userManagement" element={<Usermanagement />} />
+            <Route path="/productManagement" element={<Productmanagement />} />
+            <Route path="/productMaster" element={<Productmaster />} />
+            <Route path="/warehouse" element={<Warehouse />} />
+            <Route path="/message" element={<Message />} />
+            <Route path="/record" element={<ReorderList />} />
+            <Route path="/approvedproducts" element={<ProductTable />} />
+          </Routes>
+        </div>
+      </div>
     </Router>
   );
 }
+
 
 export default App;
 
