@@ -2,8 +2,8 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  max-width: 400px; /* Set a max width for the form */
-  margin: auto; /* Center the form horizontally */
+  max-width: 400px;
+  margin: auto;
 }
 
 .add-user-form h2 {
@@ -26,6 +26,7 @@
   border-radius: 4px;
   width: 100%;
   margin-bottom: 15px;
+  box-sizing: border-box;
 }
 
 .add-user-form input[type="password"] {
@@ -57,41 +58,56 @@
   text-align: center;
 }
 
+/* Container for password inputs */
+.password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Styling for the eye icon */
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 /* Responsive Styles */
 @media (max-width: 600px) {
   .add-user-form {
-      padding: 15px; /* Reduce padding on smaller screens */
+    padding: 15px;
   }
 
   .add-user-form h2 {
-      font-size: 1.3em; /* Slightly smaller heading */
+    font-size: 1.3em;
   }
 
   .add-user-button {
-      font-size: 0.9em; /* Smaller button text */
+    font-size: 0.9em;
   }
 
   .add-user-form input,
   .add-user-form select {
-      font-size: 0.9em; /* Smaller input/select text */
+    font-size: 0.9em;
   }
 }
 
 @media (max-width: 400px) {
   .add-user-form {
-      padding: 10px; /* Further reduce padding */
+    padding: 10px;
   }
 
   .add-user-form h2 {
-      font-size: 1.2em; /* Even smaller heading */
+    font-size: 1.2em;
   }
 
   .add-user-button {
-      font-size: 0.8em; /* Even smaller button text */
+    font-size: 0.8em;
   }
 
   .add-user-form input,
   .add-user-form select {
-      font-size: 0.8em; /* Even smaller input/select text */
+    font-size: 0.8em;
   }
 }

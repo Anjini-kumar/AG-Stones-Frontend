@@ -5,10 +5,12 @@ import API_BASE_URL from "./Apis/endpoints";
 import { RECAPTCHA_SITE_KEY } from "./Apis/endpoints"; 
 import "./Login.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons from react-icons
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -16,6 +18,10 @@ const Login = () => {
 
   const handleRecaptchaChange = (token) => {
     setRecaptchaToken(token);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -81,17 +87,27 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="form-group password-input">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Your Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <span
+                className="eye-icon"
+                onClick={togglePasswordVisibility}
+                role="button"
+                aria-label="Toggle password visibility"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
             </div>
-            <div className="form-group captcha">
+            <div className="form-group captcha"
+
+            >
               <ReCAPTCHA
                 sitekey={RECAPTCHA_SITE_KEY} // Reference the key here
                 onChange={handleRecaptchaChange}

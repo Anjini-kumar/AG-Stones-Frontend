@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
 import './AddUserForm.css';
-import { createUser  } from "./../Apis/endpoints";
-
+import { createUser } from './../Apis/endpoints';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'; // Import the required CSS for phone input styling
 
 const AddUserForm = ({ onAddUser }) => {
   const [userData, setUserData] = useState({
     name: '',
     email: '',
-    mobile: '',
+    mobile: '', // This will now include the country code
     userType: '',
     password: '',
     confirmPassword: ''
   });
 
   const [error, setError] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+  };
+
+  const handlePhoneChange = (value) => {
+    setUserData({ ...userData, mobile: value }); // Update mobile with country code
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
   const handleSubmit = async (e) => {
@@ -31,14 +47,14 @@ const AddUserForm = ({ onAddUser }) => {
           username: userData.name,
           email: userData.email,
           user_type: userData.userType,
-          mobile: userData.mobile,
+          mobile: userData.mobile, // Mobile already includes country code
           password: userData.password,
         };
-  
-        const newUser = await createUser(userPayload); // Call the centralized createUser function
+
+        const newUser = await createUser(userPayload);
         onAddUser(newUser); // Add the new user to the list
       } catch (error) {
-        setError('Error: ' + error.message); // Handle errors from the API
+        setError('Error: ' + error.message);
       }
     }
   };
@@ -51,13 +67,50 @@ const AddUserForm = ({ onAddUser }) => {
         <input type="text" name="name" value={userData.name} onChange={handleInputChange} required />
 
         <label>Email:</label>
-        <input type="email" name="email" value={userData.email} onChange={handleInputChange} required />
+        <input type="email" 
+        name="email" 
+        value={userData.email} 
+        onChange={handleInputChange} 
+        required 
+        style={{
+          width: '100%',
+        }}/>
 
         <label>Mobile:</label>
-        <input type="text" name="mobile" value={userData.mobile} onChange={handleInputChange} required />
+        <div
+  style={{
+    width: '100%',
+  }}
+>
+  <PhoneInput
+    country={'us'} 
+    value={userData.mobile}
+    onChange={handlePhoneChange}
+    inputProps={{
+      name: 'mobile',
+      required: true,
+      autoFocus: true,
+    }}
+    containerStyle={{
+      width: '100%',
+      height: '45px',
+    }}
+    inputStyle={{
+      width: '100%',
+      height: '45px', 
+      fontSize: '1rem', 
+    }}
+  />
+</div>
+
 
         <label>User Type:</label>
-        <select name="userType" value={userData.userType} onChange={handleInputChange} required>
+        <select name="userType" value={userData.userType} onChange={handleInputChange} required
+            style={{
+              width: '100%',
+              height:'45px',
+            }}
+                    >
           <option value="">Select User Type</option>
           <option value="Admin">Admin</option>
           <option value="Procurement">Procurement Team</option>
@@ -65,14 +118,46 @@ const AddUserForm = ({ onAddUser }) => {
         </select>
 
         <label>Password:</label>
-        <input type="password" name="password" value={userData.password} onChange={handleInputChange} required />
+        <div className="password-input-container">
+          <input
+            type={passwordVisible ? 'text' : 'password'}
+            name="password"
+            value={userData.password}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              height:'45px'
+            }}
+          />
+          <div className="eye-icon" onClick={togglePasswordVisibility}>
+            {passwordVisible ? <FiEyeOff /> : <FiEye />}
+          </div>
+        </div>
 
         <label>Re-enter Password:</label>
-        <input type="password" name="confirmPassword" value={userData.confirmPassword} onChange={handleInputChange} required />
+        <div className="password-input-container">
+          <input
+            type={confirmPasswordVisible ? 'text' : 'password'}
+            name="confirmPassword"
+            value={userData.confirmPassword}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              height:'45px'
+            }}
+          />
+          <div className="eye-icon" onClick={toggleConfirmPasswordVisibility}>
+            {confirmPasswordVisible ? <FiEyeOff /> : <FiEye />}
+          </div>
+        </div>
 
         {error && <p className="error">{error}</p>}
 
-        <button type="submit" className="add-user-button" style={{backgroundColor:"#ffd200"}}>Add User</button>
+        <button type="submit" className="add-user-button" style={{ backgroundColor: '#ffd200' }}>
+          Add User
+        </button>
       </form>
     </div>
   );
