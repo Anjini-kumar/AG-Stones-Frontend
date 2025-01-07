@@ -172,7 +172,6 @@ const Usermanagement = () => {
             <th>User Name</th>
             <th>Email</th>
             <th>Mobile</th>
-            <th>Gender</th>
             <th>Role</th>
             <th>Actions</th>
           </tr>
@@ -184,7 +183,6 @@ const Usermanagement = () => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.mobile}</td>
-              <td>{user.gender}</td>
               <td>{user.user_type}</td>
               <td style={{ position: 'relative' }} className="action-btn-container">
               <button

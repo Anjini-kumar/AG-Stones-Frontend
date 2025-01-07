@@ -8,7 +8,6 @@ const AddUserForm = ({ onAddUser }) => {
     name: '',
     email: '',
     mobile: '',
-    gender: '',
     userType: '',
     password: '',
     confirmPassword: ''
@@ -33,7 +32,6 @@ const AddUserForm = ({ onAddUser }) => {
           email: userData.email,
           user_type: userData.userType,
           mobile: userData.mobile,
-          gender: userData.gender,
           password: userData.password,
         };
   
@@ -57,13 +55,6 @@ const AddUserForm = ({ onAddUser }) => {
 
         <label>Mobile:</label>
         <input type="text" name="mobile" value={userData.mobile} onChange={handleInputChange} required />
-
-        <label>Gender:</label>
-        <select name="gender" value={userData.gender} onChange={handleInputChange} required>
-          <option value="">Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
 
         <label>User Type:</label>
         <select name="userType" value={userData.userType} onChange={handleInputChange} required>
