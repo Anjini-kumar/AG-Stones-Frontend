@@ -28,12 +28,7 @@ const EditUserForm = ({ user, onSave, onCancel }) => {
         <label>Mobile:</label>
         <input type="text" name="mobile" value={userData.mobile} onChange={handleInputChange} required />
 
-        <label>Gender:</label>
-        <select name="gender" value={userData.gender} onChange={handleInputChange} required>
-          <option value="">Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
+
 
         <label>User Type:</label>
         <select name="role" value={userData.user_type} onChange={handleInputChange} required>
