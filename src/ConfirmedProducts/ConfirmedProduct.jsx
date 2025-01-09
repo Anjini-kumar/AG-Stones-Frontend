@@ -154,12 +154,11 @@ const closeImagePopup = () => {
         <th>Product<br />Category</th>
         <th>Color/<br />Design</th>
         <th>Block<br />No.</th>
-        <th>No. of Bundles</th>
-        <th>Thick</th>
-        <th>Dmsn<br />(In/cm)</th>
-        <th>Length</th>
-        <th>Width</th>
-        <th>QTY<br />(SFT)</th>
+        <th>No of Slabs</th>
+        <th>Thickness(cm)</th>
+        <th>Length(inches)</th>
+        <th>Width(inches)</th>
+        <th>Quantity(sft)</th>
         <th>Note</th>
         <th>Offer Date </th>
         <th>Price/<br />Sft</th>
@@ -176,7 +175,6 @@ const closeImagePopup = () => {
             <td>{product.block_no || 'N/A'}</td>
             <td>{product.bundles || 'N/A'}</td>
             <td>{product.thickness || 'N/A'}</td>
-            <td>inches</td>
             <td>{product.length || 'N/A'}</td>
             <td>{product.width || 'N/A'}</td>
             <td>{product.quantity || 'N/A'}</td>

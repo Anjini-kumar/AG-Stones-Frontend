@@ -291,19 +291,18 @@ const Warehouse = () => {
                     <table className="product-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Product<br />Category</th>
-                                <th>Color/<br />Design</th>
-                                <th>Block<br />No.</th>
-                                <th>No. of Bundles</th>
-                                <th>Thick</th>
-                                <th>Dmsn<br />(In/cm)</th>
-                                <th>Length</th>
-                                <th>Width</th>
-                                <th>QTY<br />(SFT)</th>
-                                <th>Note</th>
-                                <th>Offer Date </th>
-                                <th>Price/<br />Sft</th>
+                            <th>ID</th>
+                            <th>Product<br />Category</th>
+                            <th>Color/<br />Design</th>
+                            <th>Block<br />No.</th>
+                            <th>No of Slabs</th>
+                            <th>Thickness(cm)</th>
+                            <th>Length(inches)</th>
+                            <th>Width(inches)</th>
+                            <th>Quantity(sft)</th>
+                            <th>Note</th>
+                            <th>Offer Date </th>
+                            <th>Price/<br />Sft</th>
                                 <th>Img</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -313,19 +312,18 @@ const Warehouse = () => {
                         <tbody>
                             {filteredProducts.map((product) => (
                                 <tr key={product.id}>
-                                    <td>{product.id}</td>
-                                    <td>{product.category || 'N/A'}</td>
-                                    <td>{product.color_design || 'N/A'}</td>
-                                    <td>{product.block_no || 'N/A'}</td>
-                                    <td>{product.bundles || 'N/A'}</td>
-                                    <td>{product.thickness || 'N/A'}</td>
-                                    <td>inches</td>
-                                    <td>{product.length || 'N/A'}</td>
-                                    <td>{product.width || 'N/A'}</td>
-                                    <td>{product.quantity || 'N/A'}</td>
-                                    <td>{product.note || 'N/A'}</td>
-                                    <td>{product.offer_start || 'N/A'}</td>
-                                    <td>{product.price || 'N/A'}</td>
+                                <td>{product.id}</td>
+                                <td>{product.category || 'N/A'}</td>
+                                <td>{product.color_design || 'N/A'}</td>
+                                <td>{product.block_no || 'N/A'}</td>
+                                <td>{product.bundles || 'N/A'}</td>
+                                <td>{product.thickness || 'N/A'}</td>
+                                <td>{product.length || 'N/A'}</td>
+                                <td>{product.width || 'N/A'}</td>
+                                <td>{product.quantity || 'N/A'}</td>
+                                <td>{product.note || 'N/A'}</td>
+                                <td>{product.offer_start || 'N/A'}</td>
+                                <td>{product.price || 'N/A'}</td>
                                     <td>
                                         <button
                                             className="gallery-button"
