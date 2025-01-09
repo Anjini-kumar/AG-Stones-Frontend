@@ -256,7 +256,7 @@ const Warehouse = () => {
     return (
         <div className="warehouse-container">
             <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
-                Welcome to the Warehouse <span style={{color:"#ffd200"}}>{user}</span> !!
+                Welcome to the Offers <span style={{color:"#ffd200"}}>{user}</span> !!
             </h1>  
             <div className="header">
                 <input
@@ -295,18 +295,18 @@ const Warehouse = () => {
                             <th>Product<br />Category</th>
                             <th>Color/<br />Design</th>
                             <th>Block<br />No.</th>
-                            <th>No of Slabs</th>
-                            <th>Thickness(cm)</th>
-                            <th>Length(inches)</th>
-                            <th>Width(inches)</th>
-                            <th>Quantity(sft)</th>
+                            <th>No of <br/>Slabs</th>
+                            <th>Thickness<br/>(cm)</th>
+                            <th>Length<br />(inches)</th>
+                            <th>Width<br />(inches)</th>
+                            <th>Quantity<br />(sft)</th>
                             <th>Note</th>
                             <th>Offer Date </th>
                             <th>Price/<br />Sft</th>
-                                <th>Img</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                                <th>Cmnt</th>
+                            <th>Img</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            <th>Cmnt</th>
                             </tr>
                         </thead>
                         <tbody>

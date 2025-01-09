@@ -107,12 +107,26 @@ const user = localStorage.getItem('user')
         });
     };
 
-                // Handle Input Change
                 const handleInputChange = (e) => {
                     const { name, value } = e.target;
-                    setNewProduct({ ...newProduct, [name]: value });
-                  };
-    
+                
+                    // Update the state
+                    const updatedProduct = { ...newProduct, [name]: value };
+                
+                    // Dynamically calculate the quantity if required fields are updated
+                    if (name === "bundles" || name === "length" || name === "width") {
+                    const { bundles, length, width } = updatedProduct;
+                
+                    // Ensure all necessary fields have values before calculating
+                    if (bundles && length && width) {
+                        const calculatedQuantity = ((length * width) / 144) * bundles;
+                        updatedProduct.quantity = calculatedQuantity.toFixed(2); // Set calculated quantity
+                    }
+                    }
+                
+                    setNewProduct(updatedProduct);
+                };
+      
     
                   const handleAddProduct = async (e) => {
                     e.preventDefault();
@@ -128,7 +142,7 @@ const user = localStorage.getItem('user')
                     formData.append('width', parseFloat(newProduct.width));
                     formData.append('quantity', parseInt(newProduct.quantity));
                     formData.append('note', newProduct.note);
-                    formData.append('offer_start', new Date(newProduct.offerStart).toISOString());
+                    formData.append('offer_start', newProduct.offerStart); // `type="date"` ensures this is YYYY-MM-DD
                     formData.append('price', parseFloat(newProduct.price));
                     formData.append('warehouse', newProduct.warehouse);
                     formData.append('color_design', newProduct.color_design);
@@ -443,7 +457,7 @@ const resetForm = () => {
                                 name="quantity"
                                 value={newProduct.quantity}
                                 onChange={handleInputChange}
-                                required
+                                readOnly
                                 />
                             </div>
 
@@ -460,7 +474,7 @@ const resetForm = () => {
                             <div className="form-group">
                                 <label>Offer Date</label>
                                 <input
-                                type="datetime-local"
+                                type="date"
                                 name="offerStart"
                                 value={newProduct.offerStart}
                                 onChange={handleInputChange}
@@ -525,11 +539,11 @@ const resetForm = () => {
                             <th>Product Category</th>
                             <th>Color / Design</th>
                             <th>Block No</th>
-                            <th>No Of Slabs</th>
-                            <th>Thickness(cm)</th>
-                            <th>Length(inches)</th>
-                            <th>Width(inches)</th>
-                            <th>Quantity(sft)</th>
+                            <th>No Of <br/>Slabs</th>
+                            <th>Thickness<br/>(cm)</th>
+                            <th>Length<br />(inches)</th>
+                            <th>Width<br />(inches)</th>
+                            <th>Quantity<br />(sft)</th>
                             <th>Note</th>
                             <th>Offer Date</th>
                             {/* <th>Status</th> */}

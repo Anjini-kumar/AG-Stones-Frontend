@@ -6,11 +6,11 @@
   background-color: #fff;
   padding: 1rem;
   box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
-  position: relative; /* For dropdown positioning */
+  position: relative; 
 }
 
 .navbar-logo img {
-  height: 5rem; /* Responsive height */
+  height: 5rem; 
   cursor: pointer;
 }
 
@@ -18,7 +18,7 @@
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Allow menu items to wrap */
+  flex-wrap: wrap; 
   transition: all 0.3s ease-in-out;
   margin-top: 2rem;
 }
@@ -55,36 +55,165 @@
   font-weight: bold;
 }
 
-/* Logout Button Styles */
-.logout-button {
-  background-color: #f0f0f0;
-  color: black;
-  border: 1px solid black;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+
+/* User Icon and Popup */
+.user-icon-wrapper {
+  position: relative;
   cursor: pointer;
-  font-size: 1rem; /* Reduce the font size */
-  transition: all 0.3s ease; /* Smooth transition for all properties */
+  padding-top: 10px;
+}
+/* User Initial Style */
+.user-initial {
+  width: 40px; 
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ffd200; 
+  color: #333; 
+  font-size: 1.2rem; 
+  font-weight: bold; 
+  border-radius: 50%; 
+  cursor: pointer; 
+  transition: background-color 0.3s;
 }
 
-.logout-button svg {
-  font-size: 1.2rem; /* Reduce icon size */
-  margin-right: 0.5rem; /* Space between icon and text */
-  transition: font-size 0.3s ease; /* Smooth transition for icon size */
+.user-initial:hover {
+  background-color: #f5b800; 
 }
 
-.logout-button:hover {
+
+.user-icon {
+  font-size: 2.3rem;
+  color: #555; 
+  transition: color 0.3s;
+}
+
+.user-icon:hover {
+  color: #ffd200; 
+}
+
+.user-popup {
+  position: absolute;
+  top: 3rem; 
+  right: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+  z-index: 1000; 
+  width: 160px; 
+}
+
+.user-popup ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-popup ul li {
+  padding: 0.8rem 1rem; /* More padding for spacing */
+  padding-right: 0%;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1.1rem; 
+  font-weight: 500; 
+  color: #333; 
+}
+
+.user-popup ul li:hover {
+  background-color: #ffd200; 
+  color: #fff;
+  border-radius: 4px; 
+}
+
+.user-popup ul li:last-child {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; 
+}
+
+.user-popup ul li:last-child:hover {
+  background-color: #d1453b; 
+  color: #fff; 
+}
+
+
+.password-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.password-popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+}
+
+.password-popup-content h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cancel,
+.btn-submit {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-cancel {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.btn-submit {
   background-color: #ffd200;
-  padding: 0.4rem 0.8rem; /* Reduce padding on hover */
+  color: #fff;
 }
 
-.logout-button:active {
-  transform: scale(0.95); /* Slightly shrink the button on click */
+.btn-cancel:hover {
+  background-color: #d32f2f;
 }
 
+.btn-submit:hover {
+  background-color: #388e3c;
+}
 /* Media Queries for Responsiveness */
 @media (max-width: 1224px) {
   .navbar-menu {
@@ -105,16 +234,6 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .logout-button {
-    font-size: 0.9rem; /* Slightly reduce font size */
-    padding: 0.4rem 0.8rem; /* Adjust padding for smaller screens */
-  }
-
-  .logout-button svg {
-    font-size: 1rem; /* Adjust icon size */
-  }
-}
 
 @media (max-width: 768px) {
   .navbar {
@@ -239,7 +358,7 @@
     margin-bottom: 1rem; /* Space below */
   }
 
-  .logout-button {
+  .user-icon-wrapper {
     margin-left: auto; /* Push to the far right */
     font-size: 1rem;
     order: 2;
@@ -331,7 +450,7 @@
     margin-bottom: 1rem; /* Space below */
   }
 
-  .logout-button {
+  .user-icon-wrapper {
     margin-left: auto; /* Push to the far right */
     font-size: 1rem;
     order: 2;

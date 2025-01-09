@@ -32,37 +32,65 @@
     background-color: #218838;
 }
 
-.table-container {
-    width: 100%;
-    max-height: 60vh; 
-    overflow: auto; 
-}
-
-/* Table Styles */
-.product-table {
-    width: 100%;
+.table-reorder {
+    margin-top: 1rem;
+    overflow-x: hidden; /* Enable horizontal scrolling on smaller screens */
+    display: flex;
+    justify-content: center; /* Center the table */
+  }
+  
+  .reorder-table {
+    width: 90%; /* Adjust width to make it a bit wider while keeping dynamic sizing */
+    max-width: 1000px; /* Add a maximum width for large screens */
     border-collapse: collapse;
+    border: 1px solid #ddd; /* Light border around the table */
+    font-family: Arial, sans-serif;
     font-size: 1rem;
-    min-width: 800px; 
-}
-
-.product-table thead {
-    background-color: #f9f9f9;
-    min-width: fit-content;
-}
-
-.product-table th,
-.product-table td {
-    padding: 1rem;
     text-align: left;
-    border: 0.1rem solid #ddd;
-}
-
-.product-table th {
-    background-color: #f2f2f2;
-    font-size: 1.1rem;}
-
-
+  }
+  
+  .reorder-table thead tr {
+    background-color: #f4f4f4; /* Light gray header */
+    color: #333; /* Darker text for header */
+    text-transform: uppercase; /* Optional: Capitalize header text */
+    font-weight: bold;
+  }
+  
+  .reorder-table th,
+  .reorder-table td {
+    padding: 0.75rem 1.5rem; /* Increase horizontal padding slightly */
+    border: 1px solid #ddd; /* Light border between cells */
+    white-space: nowrap; 
+  }
+  
+  .reorder-table tbody tr {
+    background-color: #fff; /* Default white background */
+  }
+  
+  .reorder-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray background for even rows */
+  }
+  
+  .reorder-table tbody tr:hover {
+    background-color: #f1f1f1; /* Subtle hover effect */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .reorder-table td {
+    color: #555; /* Slightly muted text for data cells */
+  }
+  
+  @media (max-width: 768px) {
+    .reorder-table th,
+    .reorder-table td {
+      padding: 0.5rem; /* Reduce padding for smaller screens */
+      font-size: 0.875rem; /* Adjust font size */
+    }
+    .reorder-table {
+      width: 100%; /* Allow the table to stretch to full width on small screens */
+    }
+  }
+  
 
 .popup {
     position: fixed;

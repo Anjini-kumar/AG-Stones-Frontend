@@ -58,7 +58,7 @@ const RequestsList = () => {
   return (
     <div style={{  fontFamily: "Arial, sans-serif" }}>
       <h1 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "1.5rem" }}>
-        Welcome to the Requests <span style={{color:"#ffd200"}}>{user}</span> !!
+        Welcome to the Message <span style={{color:"#ffd200"}}>{user}</span> !!
       </h1>
 
       {/* Filter Section */}
@@ -166,8 +166,8 @@ const RequestsList = () => {
                   style={{
                     padding: "0.5rem 1rem",
                     margin: "0.5rem 0",
-                    backgroundColor: "#007bff",
-                    color: "#fff",
+                    backgroundColor: "#ffd200",
+                    color: "#333",
                     border: "none",
                     borderRadius: "5px",
                     cursor: "pointer",

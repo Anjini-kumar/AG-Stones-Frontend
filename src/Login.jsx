@@ -65,9 +65,17 @@ const Login = () => {
         window.location.reload();
       } else {
         setError(data.error || "Login failed");
+        setRecaptchaToken(""); // Clear the reCAPTCHA token
+        if (window.grecaptcha) {
+          window.grecaptcha.reset(); // Reset the reCAPTCHA widget
+        }
       }
     } catch (err) {
       setError("Error: " + err.message);
+      setRecaptchaToken(""); // Clear the reCAPTCHA token
+      if (window.grecaptcha) {
+        window.grecaptcha.reset(); // Reset the reCAPTCHA widget
+      }
     }
   };
 

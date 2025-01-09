@@ -154,11 +154,11 @@ const closeImagePopup = () => {
         <th>Product<br />Category</th>
         <th>Color/<br />Design</th>
         <th>Block<br />No.</th>
-        <th>No of Slabs</th>
-        <th>Thickness(cm)</th>
-        <th>Length(inches)</th>
-        <th>Width(inches)</th>
-        <th>Quantity(sft)</th>
+        <th>No of <br/>Slabs</th>
+        <th>Thickness<br/>(cm)</th>
+        <th>Length<br />(inches)</th>
+        <th>Width<br />(inches)</th>
+        <th>Quantity<br />(sft)</th>
         <th>Note</th>
         <th>Offer Date </th>
         <th>Price/<br />Sft</th>
@@ -246,13 +246,14 @@ const closeImagePopup = () => {
                 <div className="modal-actions">
                   <button
                     className="btn cancel-btn"
+                    style={{backgroundColor:"#ddd", color:"black"}}
                     onClick={() => setIsModalOpen(false)}
                   >
                     Cancel
                   </button>
                   <button className="btn save-btn" onClick={handleSave}
                 style={{
-                    backgroundColor: "#4CAF50",
+                    backgroundColor: "#ffd200",
                 }}>
                     Save
                   </button>

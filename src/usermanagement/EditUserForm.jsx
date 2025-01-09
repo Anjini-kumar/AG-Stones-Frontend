@@ -70,7 +70,7 @@ const EditUserForm = ({ user, onSave, onCancel }) => {
           }}
         />
 
-        {/* <label>Password:</label>
+        <label>Password:</label>
         <input
           type="password"
           name="password"
@@ -80,7 +80,7 @@ const EditUserForm = ({ user, onSave, onCancel }) => {
             width: '100%',
             height:'45px',
           }}
-        /> */}
+        />
 
         <label>User Type:</label>
         <select
